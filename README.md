@@ -7,6 +7,13 @@
 ![Status](https://img.shields.io/badge/status-research--project-yellow)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+A clean **from-scratch PyTorch implementation of** FoldingNet from the paper FoldingNet: Point Cloud Auto-encoder via Deep Grid Deformation.
+
+The objective of this project is twofold:
+
+1. **Reproduce FoldingNet training from scratch**
+2. **Investigate alternative optimization methods**, specifically the Sparse Bregman Optimizer, and compare its performance with the AdamW optimizer used in the original paper.
+
 ---
 
 ### Navigation
@@ -19,15 +26,6 @@
 [Issues](#known-issues-and-proposed-improvements) •
 [Future Work](#future-work) •
 [References](#references)
-
----
-
-A clean **from-scratch PyTorch implementation of** FoldingNet from the paper FoldingNet: Point Cloud Auto-encoder via Deep Grid Deformation.
-
-The objective of this project is twofold:
-
-1. **Reproduce FoldingNet training from scratch**
-2. **Investigate alternative optimization methods**, specifically the Sparse Bregman Optimizer, and compare its performance with the AdamW optimizer used in the original paper.
 
 ---
 
@@ -92,11 +90,7 @@ The implementation follows the hyperparameters described in the original paper w
 
 ### Planned Research Extension
 
-The original objective of this project was to evaluate the effect of **alternative optimization strategies** on the performance of the model.
-
-In particular, the project aims to integrate the:
-
-* Sparse Bregman Optimizer
+The original objective of this project was to evaluate the effect of **alternative optimization strategies** on the performance of the model. In particular, the project aims to integrate the Sparse Bregman Optimizer (a special optimization algorithm) for natively training sparse neural networks.
 
 The goal of this experiment is to investigate:
 
@@ -170,9 +164,9 @@ src/data
 Just clone the repository, change directory into it and install dependencies via **uv**.
 
 ```bash
-git clone https://github.com/yourusername/foldingnet-from-scratch.git
+git clone https://dagshub.com/Harkhymadhe/sparse-bregman.git
 
-cd foldingnet-from-scratch
+cd sparse-bregman
 
 uv pip install -e .
 ```
@@ -296,7 +290,7 @@ Point cloud reconstruction quality is best evaluated visually, but the repositor
 
 **Issue**
 
-Reproducibility is important for research projects, but presently experiment configuration management is currently limited. The hyperparameters are passed directly in the ```main.py``` and ```eval.py``` files and this is not best practice. In addition, there are no real logs, beyond just a copy of the outputs emitted to the ternminal during training.
+Reproducibility is important for research projects, but presently experiment configuration management is currently limited. The hyperparameters are embedded directly in the ```main.py``` and ```eval.py``` files and this is not best practice. In addition, there are no real logs, beyond just a copy of the outputs emitted to the ternminal during training.
 
 **Possible Fixes**
 
@@ -316,7 +310,7 @@ Reproducibility is important for research projects, but presently experiment con
 
 **Issue**
 
-The objective function is an important cornerstone for the training process. The wrog function will likely lead to the wrog results.
+The objective function is an important cornerstone for the training process. The wrong function will likely lead to the wrong results. For this project, the objective function is a custom-designed form of the Chamfer's distance.
 
 **Possible Fixes**
 
@@ -359,9 +353,9 @@ This is already being fixed by:
 
 **Issue**
 
-Presently, in keeping with the  original FoldingNet paper, there is no augmentation applied to the point clouds. This would be a good idea to implement however, as it makes for a more robust model. Examples of augmentatiins that can be applied to the point clouds include:
+Presently, in keeping with the  original FoldingNet paper, there is no augmentation applied to the point clouds. This would be a good idea to implement however, as it makes for a more robust model. Examples of augmentations that can be applied to the point clouds include:
 
-1. Point subsampling (i.e., trying to artificially force the model to reconstruct meaningfully, eve with hazy inputs).
+1. Point subsampling (i.e., trying to artificially force the model to reconstruct meaningfully, even with hazy inputs).
 2. Point jittering (i.e., adding random noise to the 3D coordinates of the points in the cloud; makes for model robustness).
 3. Cloud rotation (i.e., reconstruction should be possible, irrespective of the cloud's orientation).
 
