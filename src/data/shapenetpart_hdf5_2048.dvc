@@ -1,0 +1,6 @@
+outs:
+- md5: cfc99c34f30ab216c30f1da8d9976be9.dir
+  size: 692701820
+  nfiles: 27
+  hash: md5
+  path: shapenetpart_hdf5_2048

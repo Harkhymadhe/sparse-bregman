@@ -1,0 +1,630 @@
+home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+                                                                                                                                                             /home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+                                                                                                                                                             /home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+W0304 17:39:43.165000 4819 site-packages/torch/_dynamo/convert_frame.py:1676] [7/8] torch._dynamo hit config.recompile_limit (8)
+W0304 17:39:43.165000 4819 site-packages/torch/_dynamo/convert_frame.py:1676] [7/8]    function: '_collate' (/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch_geometric/data/collate.py:149)
+W0304 17:39:43.165000 4819 site-packages/torch/_dynamo/convert_frame.py:1676] [7/8]    last reason: 7/7: key == 'edge_index'                                  
+    # key = str(key)  # torch_geometric/data/collate.py:162 in _collate
+W0304 17:39:43.165000 4819 site-packages/torch/_dynamo/convert_frame.py:1676] [7/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+W0304 17:39:43.165000 4819 site-packages/torch/_dynamo/convert_frame.py:1676] [7/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/compile/programming_model.recompilation.html
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+/home/harkhymadhe/miniforge3/envs/bregman/lib/python3.13/site-packages/torch/_dynamo/guards.py:1148: RuntimeWarning: Guards may run slower on Python 3.13.0. Consider upgrading to Python 3.13.1+.
+  warnings.warn(
+Epoch 1 | Train loss: 1.2005 | Test loss: 0.7687
+Epoch 2 | Train loss: 0.6356 | Test loss: 0.4844
+Epoch 3 | Train loss: 0.4586 | Test loss: 0.4195
+Epoch 4 | Train loss: 0.4134 | Test loss: 0.3783
+Epoch 5 | Train loss: 0.3666 | Test loss: 0.3260
+Epoch 6 | Train loss: 0.3068 | Test loss: 0.2878
+Epoch 7 | Train loss: 0.2785 | Test loss: 0.2643
+Epoch 8 | Train loss: 0.2507 | Test loss: 0.2469
+Epoch 9 | Train loss: 0.2335 | Test loss: 0.2214
+Epoch 10 | Train loss: 0.2184 | Test loss: 0.2045
+Epoch 11 | Train loss: 0.2111 | Test loss: 0.2178
+Epoch 12 | Train loss: 0.1970 | Test loss: 0.1901
+Epoch 13 | Train loss: 0.1897 | Test loss: 0.2128
+Epoch 14 | Train loss: 0.1836 | Test loss: 0.1749
+Epoch 15 | Train loss: 0.1717 | Test loss: 0.1727
+Epoch 16 | Train loss: 0.1659 | Test loss: 0.1696
+Epoch 17 | Train loss: 0.1576 | Test loss: 0.1599
+Epoch 18 | Train loss: 0.1475 | Test loss: 0.1676
+Epoch 19 | Train loss: 0.1350 | Test loss: 0.1488
+Epoch 20 | Train loss: 0.1332 | Test loss: 0.1297
+Epoch 21 | Train loss: 0.1237 | Test loss: 0.1269
+Epoch 22 | Train loss: 0.1234 | Test loss: 0.1328
+Epoch 23 | Train loss: 0.1161 | Test loss: 0.1152
+Epoch 24 | Train loss: 0.1133 | Test loss: 0.1171
+Epoch 25 | Train loss: 0.1135 | Test loss: 0.1209
+Epoch 26 | Train loss: 0.1102 | Test loss: 0.1269
+Epoch 27 | Train loss: 0.1080 | Test loss: 0.1200
+Epoch 28 | Train loss: 0.1042 | Test loss: 0.1071
+Epoch 29 | Train loss: 0.1031 | Test loss: 0.1127
+Epoch 30 | Train loss: 0.1014 | Test loss: 0.1060
+Epoch 31 | Train loss: 0.1022 | Test loss: 0.1139
+Epoch 32 | Train loss: 0.0966 | Test loss: 0.1061
+Epoch 33 | Train loss: 0.0993 | Test loss: 0.1027
+Epoch 34 | Train loss: 0.0946 | Test loss: 0.1094
+Epoch 35 | Train loss: 0.0950 | Test loss: 0.1045
+Epoch 36 | Train loss: 0.0953 | Test loss: 0.1114
+Epoch 37 | Train loss: 0.0951 | Test loss: 0.1034
+Epoch 38 | Train loss: 0.0945 | Test loss: 0.1030
+Epoch 39 | Train loss: 0.0920 | Test loss: 0.1117
+Epoch 40 | Train loss: 0.0918 | Test loss: 0.1065
+Epoch 41 | Train loss: 0.0909 | Test loss: 0.1090
+Epoch 42 | Train loss: 0.0909 | Test loss: 0.1088
+Epoch 43 | Train loss: 0.0888 | Test loss: 0.1039
+Epoch 44 | Train loss: 0.0899 | Test loss: 0.1018
+Epoch 45 | Train loss: 0.0861 | Test loss: 0.1015
+Epoch 46 | Train loss: 0.0871 | Test loss: 0.0952
+Epoch 47 | Train loss: 0.0852 | Test loss: 0.0944
+Epoch 48 | Train loss: 0.0833 | Test loss: 0.0910
+Epoch 49 | Train loss: 0.0822 | Test loss: 0.0939
+Epoch 50 | Train loss: 0.0823 | Test loss: 0.0953
+Epoch 51 | Train loss: 0.0794 | Test loss: 0.0874
+Epoch 52 | Train loss: 0.0804 | Test loss: 0.0857
+Epoch 53 | Train loss: 0.0776 | Test loss: 0.0895
+Epoch 54 | Train loss: 0.0797 | Test loss: 0.0853
+Epoch 55 | Train loss: 0.0763 | Test loss: 0.0859
+Epoch 56 | Train loss: 0.0767 | Test loss: 0.0874
+Epoch 57 | Train loss: 0.0770 | Test loss: 0.0818
+Epoch 58 | Train loss: 0.0761 | Test loss: 0.0833
+Epoch 59 | Train loss: 0.0749 | Test loss: 0.0902
+Epoch 60 | Train loss: 0.0745 | Test loss: 0.0859
+Epoch 61 | Train loss: 0.0739 | Test loss: 0.0865
+Epoch 62 | Train loss: 0.0727 | Test loss: 0.0800
+Epoch 63 | Train loss: 0.0731 | Test loss: 0.0828
+Epoch 64 | Train loss: 0.0727 | Test loss: 0.0822
+Epoch 65 | Train loss: 0.0715 | Test loss: 0.0853
+Epoch 66 | Train loss: 0.0707 | Test loss: 0.0822
+Epoch 67 | Train loss: 0.0694 | Test loss: 0.0871
+Epoch 68 | Train loss: 0.0717 | Test loss: 0.0961
+Epoch 69 | Train loss: 0.0706 | Test loss: 0.0848
+Epoch 70 | Train loss: 0.0696 | Test loss: 0.0843
+Epoch 71 | Train loss: 0.0693 | Test loss: 0.0822
+Epoch 72 | Train loss: 0.0711 | Test loss: 0.0772
+Epoch 73 | Train loss: 0.0667 | Test loss: 0.0854
+Epoch 74 | Train loss: 0.0688 | Test loss: 0.0772
+Epoch 75 | Train loss: 0.0681 | Test loss: 0.0832
+Epoch 76 | Train loss: 0.0662 | Test loss: 0.0803
+Epoch 77 | Train loss: 0.0672 | Test loss: 0.0809
+Epoch 78 | Train loss: 0.0673 | Test loss: 0.0828
+Epoch 79 | Train loss: 0.0656 | Test loss: 0.0835
+Epoch 80 | Train loss: 0.0657 | Test loss: 0.0763
+Epoch 81 | Train loss: 0.0643 | Test loss: 0.0795
+Epoch 82 | Train loss: 0.0646 | Test loss: 0.0752
+Epoch 83 | Train loss: 0.0631 | Test loss: 0.0804
+Epoch 84 | Train loss: 0.0648 | Test loss: 0.0811
+Epoch 85 | Train loss: 0.0638 | Test loss: 0.0822
+Epoch 86 | Train loss: 0.0634 | Test loss: 0.0816
+Epoch 87 | Train loss: 0.0629 | Test loss: 0.0798
+Epoch 88 | Train loss: 0.0627 | Test loss: 0.0752
+Epoch 89 | Train loss: 0.0615 | Test loss: 0.0773
+Epoch 90 | Train loss: 0.0608 | Test loss: 0.0770
+Epoch 91 | Train loss: 0.0614 | Test loss: 0.0740
+Epoch 92 | Train loss: 0.0611 | Test loss: 0.0723
+Epoch 93 | Train loss: 0.0609 | Test loss: 0.0752
+Epoch 94 | Train loss: 0.0613 | Test loss: 0.0806
+Epoch 95 | Train loss: 0.0618 | Test loss: 0.0737
+Epoch 96 | Train loss: 0.0600 | Test loss: 0.0701
+Epoch 97 | Train loss: 0.0589 | Test loss: 0.0763
+Epoch 98 | Train loss: 0.0589 | Test loss: 0.0745
+Epoch 99 | Train loss: 0.0690 | Test loss: 0.0779
+Epoch 100 | Train loss: 0.0626 | Test loss: 0.0724
+Epoch 101 | Train loss: 0.0582 | Test loss: 0.0708
+Epoch 102 | Train loss: 0.0576 | Test loss: 0.0797
+Epoch 103 | Train loss: 0.0577 | Test loss: 0.0758
+Epoch 104 | Train loss: 0.0578 | Test loss: 0.0722
+Epoch 105 | Train loss: 0.0573 | Test loss: 0.0744
+Epoch 106 | Train loss: 0.0567 | Test loss: 0.0737
+Epoch 107 | Train loss: 0.0567 | Test loss: 0.0734
+Epoch 108 | Train loss: 0.0575 | Test loss: 0.0790
+Epoch 109 | Train loss: 0.0564 | Test loss: 0.0770
+Epoch 110 | Train loss: 0.0559 | Test loss: 0.0739
+Epoch 111 | Train loss: 0.0567 | Test loss: 0.0731
+Epoch 112 | Train loss: 0.0558 | Test loss: 0.0764
+Epoch 113 | Train loss: 0.0545 | Test loss: 0.0679
+Epoch 114 | Train loss: 0.0552 | Test loss: 0.0694
+Epoch 115 | Train loss: 0.0542 | Test loss: 0.0704
+Epoch 116 | Train loss: 0.0547 | Test loss: 0.0723
+Epoch 117 | Train loss: 0.0546 | Test loss: 0.0729
+Epoch 118 | Train loss: 0.0539 | Test loss: 0.0704
+Epoch 119 | Train loss: 0.0530 | Test loss: 0.0690
+Epoch 120 | Train loss: 0.0528 | Test loss: 0.0690
+Epoch 121 | Train loss: 0.0546 | Test loss: 0.0687
+Epoch 122 | Train loss: 0.0527 | Test loss: 0.0690
+Epoch 123 | Train loss: 0.0530 | Test loss: 0.0694
+Epoch 124 | Train loss: 0.0521 | Test loss: 0.0666
+Epoch 125 | Train loss: 0.0527 | Test loss: 0.0765
+Epoch 126 | Train loss: 0.0520 | Test loss: 0.0726
+Epoch 127 | Train loss: 0.0520 | Test loss: 0.0683
+Epoch 128 | Train loss: 0.0512 | Test loss: 0.0821
+Epoch 129 | Train loss: 0.0513 | Test loss: 0.0677
+Epoch 130 | Train loss: 0.0516 | Test loss: 0.0727
+Epoch 131 | Train loss: 0.0499 | Test loss: 0.0689
+Epoch 132 | Train loss: 0.0506 | Test loss: 0.0766
+Epoch 133 | Train loss: 0.0509 | Test loss: 0.0688
+Epoch 134 | Train loss: 0.0504 | Test loss: 0.0655
+Epoch 135 | Train loss: 0.0505 | Test loss: 0.0653
+Epoch 136 | Train loss: 0.0503 | Test loss: 0.0735
+Epoch 137 | Train loss: 0.0497 | Test loss: 0.0653
+Epoch 138 | Train loss: 0.0493 | Test loss: 0.0686
+Epoch 139 | Train loss: 0.0486 | Test loss: 0.0707
+Epoch 140 | Train loss: 0.0501 | Test loss: 0.0674
+Epoch 141 | Train loss: 0.0487 | Test loss: 0.0705
+Epoch 142 | Train loss: 0.0494 | Test loss: 0.0669
+Epoch 143 | Train loss: 0.0479 | Test loss: 0.0689
+Epoch 144 | Train loss: 0.0497 | Test loss: 0.0742
+Epoch 145 | Train loss: 0.0486 | Test loss: 0.0664
+Epoch 146 | Train loss: 0.0473 | Test loss: 0.0683
+Epoch 147 | Train loss: 0.0481 | Test loss: 0.0701
+Epoch 148 | Train loss: 0.0471 | Test loss: 0.0711
+Epoch 149 | Train loss: 0.0475 | Test loss: 0.0669
+Epoch 150 | Train loss: 0.0473 | Test loss: 0.0656
+Epoch 151 | Train loss: 0.0481 | Test loss: 0.0658
+Epoch 152 | Train loss: 0.0473 | Test loss: 0.0661
+Epoch 153 | Train loss: 0.0461 | Test loss: 0.0643
+Epoch 154 | Train loss: 0.0463 | Test loss: 0.0664
+Epoch 155 | Train loss: 0.0462 | Test loss: 0.0713
+Epoch 156 | Train loss: 0.0474 | Test loss: 0.0676
+Epoch 157 | Train loss: 0.0465 | Test loss: 0.0749
+Epoch 158 | Train loss: 0.0466 | Test loss: 0.0668
+Epoch 159 | Train loss: 0.0467 | Test loss: 0.0663
+Epoch 160 | Train loss: 0.0458 | Test loss: 0.0646
+Epoch 161 | Train loss: 0.0471 | Test loss: 0.0660
+Epoch 162 | Train loss: 0.0464 | Test loss: 0.0638
+Epoch 163 | Train loss: 0.0457 | Test loss: 0.0675
+Epoch 164 | Train loss: 0.0447 | Test loss: 0.0631
+Epoch 165 | Train loss: 0.0461 | Test loss: 0.0684
+Epoch 166 | Train loss: 0.0458 | Test loss: 0.0665
+Epoch 167 | Train loss: 0.0447 | Test loss: 0.0652
+Epoch 168 | Train loss: 0.0450 | Test loss: 0.0698
+Epoch 169 | Train loss: 0.0444 | Test loss: 0.0692
+Epoch 170 | Train loss: 0.0444 | Test loss: 0.0640
+Epoch 171 | Train loss: 0.0452 | Test loss: 0.0706
+Epoch 172 | Train loss: 0.0447 | Test loss: 0.0677
+Epoch 173 | Train loss: 0.0438 | Test loss: 0.0686
+Epoch 174 | Train loss: 0.0438 | Test loss: 0.0670
+Epoch 175 | Train loss: 0.0441 | Test loss: 0.0633
+Epoch 176 | Train loss: 0.0443 | Test loss: 0.0653
+Epoch 177 | Train loss: 0.0430 | Test loss: 0.0665
+Epoch 178 | Train loss: 0.0432 | Test loss: 0.0669
+Epoch 179 | Train loss: 0.0425 | Test loss: 0.0709
+Epoch 180 | Train loss: 0.0436 | Test loss: 0.0695
+Epoch 181 | Train loss: 0.0434 | Test loss: 0.0674
+Epoch 182 | Train loss: 0.0432 | Test loss: 0.0654
+Epoch 183 | Train loss: 0.0426 | Test loss: 0.0641
+Epoch 184 | Train loss: 0.0429 | Test loss: 0.0753
+Epoch 185 | Train loss: 0.0429 | Test loss: 0.0671
+Epoch 186 | Train loss: 0.0421 | Test loss: 0.0642
+Epoch 187 | Train loss: 0.0423 | Test loss: 0.0718
+Epoch 188 | Train loss: 0.0427 | Test loss: 0.0637
+Epoch 189 | Train loss: 0.0426 | Test loss: 0.0632
+Epoch 190 | Train loss: 0.0411 | Test loss: 0.0624
+Epoch 191 | Train loss: 0.0412 | Test loss: 0.0665
+Epoch 192 | Train loss: 0.0426 | Test loss: 0.0686
+Epoch 193 | Train loss: 0.0426 | Test loss: 0.0699
+Epoch 194 | Train loss: 0.0421 | Test loss: 0.0626
+Epoch 195 | Train loss: 0.0422 | Test loss: 0.0672
+Epoch 196 | Train loss: 0.0409 | Test loss: 0.0662
+Epoch 197 | Train loss: 0.0406 | Test loss: 0.0649
+Epoch 198 | Train loss: 0.0403 | Test loss: 0.0607
+Epoch 199 | Train loss: 0.0407 | Test loss: 0.0647
+Epoch 200 | Train loss: 0.0404 | Test loss: 0.0623                                                                                                             
+Epoch 201 | Train loss: 0.0417 | Test loss: 0.0636
+Epoch 202 | Train loss: 0.0405 | Test loss: 0.0647
+Epoch 203 | Train loss: 0.0399 | Test loss: 0.0621
+Epoch 204 | Train loss: 0.0398 | Test loss: 0.0686
+Epoch 205 | Train loss: 0.0398 | Test loss: 0.0640
+Epoch 207 | Train loss: 0.0393 | Test loss: 0.0648
+Epoch 208 | Train loss: 0.0395 | Test loss: 0.0636
+Epoch 209 | Train loss: 0.0398 | Test loss: 0.0637
+
+
+Training Phase:  30%|██████████████████████████████▊                                                                       
+Training Phase:  30%|██████████████████████████████▉                                                                       
+Training Phase:  30%|███████████████████████████████                                                                       
+Training Phase:  31%|███████████████████████████████▏                                                                      
+Training Phase:  31%|███████████████████████████████▎                                                                      
+Training Phase:  31%|███████████████████████████████▎                                                                      
+Training Phase:  31%|███████████████████████████████▍                                                                      
+Training Phase:  31%|███████████████████████████████▌                                                                      
+Training Phase:  31%|███████████████████████████████▋                                                                      
+Training Phase:  31%|███████████████████████████████▊                                                                      
+Training Phase:  31%|███████████████████████████████▊                                                                      
+Training Phase:  31%|███████████████████████████████▉                                                                      
+Training Phase:  31%|████████████████████████████████                                                                      
+Training Phase:  32%|████████████████████████████████▏                                                                     
+Training Phase:  32%|████████████████████████████████▎                                                                     
+Training Phase:  32%|████████████████████████████████▍                                                                     
+Training Phase:  32%|████████████████████████████████▍                                                                     
+Training Phase:  32%|████████████████████████████████▌                                                                     
+Training Phase:  32%|████████████████████████████████▋                                                                     
+Training Phase:  32%|████████████████████████████████▊                                                                     
+Training Phase:  32%|████████████████████████████████▉                                                                     
+Training Phase:  32%|████████████████████████████████▉                                                                     
+Training Phase:  32%|█████████████████████████████████                                                                     
+Training Phase:  33%|█████████████████████████████████▏                                                                    
+Training Phase:  33%|█████████████████████████████████▎                                                                    
+Training Phase:  33%|█████████████████████████████████▍                                                                    
+Training Phase:  33%|█████████████████████████████████▍                                                                    
+Training Phase:  33%|█████████████████████████████████▌                                                                    
+Training Phase:  33%|█████████████████████████████████▋                                                                    
+Training Phase:  33%|█████████████████████████████████▊                                                                    
+Training Phase:  33%|█████████████████████████████████▉                                                                    
+Training Phase:  33%|██████████████████████████████████                                                                    
+Training Phase:  33%|██████████████████████████████████                                                                    
+Training Phase:  34%|██████████████████████████████████▏                                                                   
+Training Phase:  34%|██████████████████████████████████▎                                                                   
+Training Phase:  34%|██████████████████████████████████▍                                                                   
+Training Phase:  34%|██████████████████████████████████▌                                                                   
+Training Phase:  34%|██████████████████████████████████▌                                                                   
+Training Phase:  34%|██████████████████████████████████▋                                                                   
+Training Phase:  34%|██████████████████████████████████▊                                                                   
+Training Phase:  34%|██████████████████████████████████▉                                                                   
+Training Phase:  34%|███████████████████████████████████                                                                   
+Training Phase:  34%|███████████████████████████████████                                                                   
+Training Phase:  35%|███████████████████████████████████▏                                                                  
+Training Phase:  35%|███████████████████████████████████▎                                                                  
+Training Phase:  35%|███████████████████████████████████▍                                                                  
+Training Phase:  35%|███████████████████████████████████▌                                                                  
+Training Phase:  35%|███████████████████████████████████▌                                                                  
+Training Phase:  35%|███████████████████████████████████▋                                                                  
+Training Phase:  35%|███████████████████████████████████▊                                                                  
+Training Phase:  35%|███████████████████████████████████▉                                                                  
+Training Phase:  35%|████████████████████████████████████                                                                  
+Training Phase:  35%|████████████████████████████████████▏                                                                 
+Training Phase:  36%|████████████████████████████████████▏                                                                 
+Training Phase:  36%|████████████████████████████████████▎                                                                 
+Training Phase:  36%|████████████████████████████████████▍                                                                 
+Training Phase:  36%|████████████████████████████████████▌                                                                 
+Training Phase:  36%|████████████████████████████████████▋                                                                 
+Training Phase:  36%|████████████████████████████████████▋                                                                 
+Training Phase:  36%|████████████████████████████████████▊                                                                 
+Training Phase:  36%|████████████████████████████████████▉                                                                 
+Training Phase:  36%|█████████████████████████████████████                                                                 
+Training Phase:  36%|█████████████████████████████████████▏                                                                
+Training Phase:  37%|█████████████████████████████████████▏                                                                
+Training Phase:  37%|█████████████████████████████████████▎                                                                
+Training Phase:  37%|█████████████████████████████████████▍                                                                
+Training Phase:  37%|█████████████████████████████████████▌                                                                
+Training Phase:  37%|█████████████████████████████████████▋                                                                
+Training Phase:  37%|█████████████████████████████████████▊                                                                
+Training Phase:  37%|█████████████████████████████████████▊                                                                
+Training Phase:  37%|█████████████████████████████████████▉                                                                
+Training Phase:  37%|██████████████████████████████████████                                                                
+Training Phase:  37%|██████████████████████████████████████▏                                                               
+Training Phase:  38%|██████████████████████████████████████▎                                                               
+Training Phase:  38%|██████████████████████████████████████▎                                                               
+Training Phase:  38%|██████████████████████████████████████▍                                                               
+Training Phase:  38%|██████████████████████████████████████▌                                                               
+Training Phase:  38%|██████████████████████████████████████▋                                                               
+Training Phase:  38%|██████████████████████████████████████▊                                                               
+Training Phase:  38%|██████████████████████████████████████▊                                                               
+Training Phase:  38%|██████████████████████████████████████▉                                                               
+Training Phase:  38%|███████████████████████████████████████                                                               
+Training Phase:  38%|███████████████████████████████████████▏                                                              
+Training Phase:  39%|███████████████████████████████████████▎                                                              
+Training Phase:  39%|███████████████████████████████████████▍                                                              
+Training Phase:  39%|███████████████████████████████████████▍                                                              
+Training Phase:  39%|███████████████████████████████████████▌                                                              
+Training Phase:  39%|███████████████████████████████████████▋                                                              
+Training Phase:  39%|███████████████████████████████████████▊                                                              
+Training Phase:  39%|███████████████████████████████████████▉                                                              
+Training Phase:  39%|███████████████████████████████████████▉                                                              
+Training Phase:  39%|████████████████████████████████████████                                                              
+Training Phase:  39%|████████████████████████████████████████▏                                                             
+Training Phase:  40%|████████████████████████████████████████▎                                                             
+Training Phase:  40%|████████████████████████████████████████▍                                                             
+Training Phase:  40%|████████████████████████████████████████▍                                                             
+Training Phase:  40%|████████████████████████████████████████▌                                                             
+Training Phase:  40%|████████████████████████████████████████▋                                                             
+Training Phase:  40%|████████████████████████████████████████▊                                                             
+Training Phase:  40%|████████████████████████████████████████▉                                                             
+Training Phase:  40%|█████████████████████████████████████████                                                             
+Training Phase:  40%|█████████████████████████████████████████                                                             
+Training Phase:  40%|█████████████████████████████████████████▏                                                            
+Training Phase:  40%|█████████████████████████████████████████▎                                                            
+Training Phase:  41%|█████████████████████████████████████████▍                                                            
+Training Phase:  41%|█████████████████████████████████████████▌                                                            
+Training Phase:  41%|█████████████████████████████████████████▌                                                            
+Training Phase:  41%|█████████████████████████████████████████▋                                                            
+Training Phase:  41%|█████████████████████████████████████████▊                                                            
+Training Phase:  41%|█████████████████████████████████████████▉                                                            
+Training Phase:  41%|██████████████████████████████████████████                                                            
+Training Phase:  41%|██████████████████████████████████████████                                                            
+Training Phase:  41%|██████████████████████████████████████████▏                                                           
+Training Phase:  41%|██████████████████████████████████████████▎                                                           
+Training Phase:  42%|██████████████████████████████████████████▍                                                           
+Training Phase:  42%|██████████████████████████████████████████▌                                                           
+Training Phase:  42%|██████████████████████████████████████████▋                                                           
+Training Phase:  42%|██████████████████████████████████████████▋                                                           
+Training Phase:  42%|██████████████████████████████████████████▊                                                           
+Training Phase:  42%|██████████████████████████████████████████▉                                                           
+Training Phase:  42%|███████████████████████████████████████████                                                           
+Training Phase:  42%|███████████████████████████████████████████▏                                                          
+Training Phase:  42%|███████████████████████████████████████████▏                                                          
+Training Phase:  42%|███████████████████████████████████████████▎                                                          
+Training Phase:  43%|███████████████████████████████████████████▍                                                          
+Training Phase:  43%|███████████████████████████████████████████▌                                                          
+Training Phase:  43%|███████████████████████████████████████████▋                                                          
+Training Phase:  43%|███████████████████████████████████████████▋                                                          
+Training Phase:  43%|███████████████████████████████████████████▊                                                          
+Training Phase:  43%|███████████████████████████████████████████▉                                                          
+Training Phase:  43%|████████████████████████████████████████████                                                          
+Training Phase:  43%|████████████████████████████████████████████▏                                                         
+Training Phase:  43%|████████████████████████████████████████████▎                                                         
+Training Phase:  43%|████████████████████████████████████████████▎                                                         
+Training Phase:  44%|████████████████████████████████████████████▍                                                         
+Training Phase:  44%|████████████████████████████████████████████▌                                                         
+Training Phase:  44%|████████████████████████████████████████████▋                                                         
+Training Phase:  44%|████████████████████████████████████████████▊                                                         
+Training Phase:  44%|████████████████████████████████████████████▊                                                         
+Training Phase:  44%|████████████████████████████████████████████▉                                                         
+Training Phase:  44%|█████████████████████████████████████████████                                                         
+Training Phase:  44%|█████████████████████████████████████████████▏                                                        
+Training Phase:  44%|█████████████████████████████████████████████▎                                                        
+Training Phase:  44%|█████████████████████████████████████████████▎                                                        
+Training Phase:  45%|█████████████████████████████████████████████▍                                                        
+Training Phase:  45%|█████████████████████████████████████████████▌                                                        
+Training Phase:  45%|█████████████████████████████████████████████▋                                                        
+Training Phase:  45%|█████████████████████████████████████████████▊                                                        
+Training Phase:  45%|█████████████████████████████████████████████▊                                                        
+Training Phase:  45%|█████████████████████████████████████████████▉                                                        
+Training Phase:  45%|██████████████████████████████████████████████                                                        
+Training Phase:  45%|██████████████████████████████████████████████▏                                                       
+Training Phase:  45%|██████████████████████████████████████████████▎                                                       
+Training Phase:  45%|██████████████████████████████████████████████▍                                                       
+Training Phase:  46%|██████████████████████████████████████████████▍                                                       
+Training Phase:  46%|██████████████████████████████████████████████▌                                                       
+Training Phase:  46%|██████████████████████████████████████████████▋                                                       
+Training Phase:  46%|██████████████████████████████████████████████▊                                                       
+Training Phase:  46%|██████████████████████████████████████████████▉                                                       
+Training Phase:  46%|██████████████████████████████████████████████▉                                                       
+Training Phase:  46%|███████████████████████████████████████████████                                                       
+Training Phase:  46%|███████████████████████████████████████████████▏                                                      
+Training Phase:  46%|███████████████████████████████████████████████▎                                                      
+Training Phase:  46%|███████████████████████████████████████████████▍                                                      
+Training Phase:  47%|███████████████████████████████████████████████▍                                                      
+Training Phase:  47%|███████████████████████████████████████████████▌                                                      
+Training Phase:  47%|███████████████████████████████████████████████▋                                                      
+Training Phase:  47%|███████████████████████████████████████████████▊                                                      
+Training Phase:  47%|███████████████████████████████████████████████▉                                                      
+Training Phase:  47%|████████████████████████████████████████████████                                                      
+Training Phase:  47%|████████████████████████████████████████████████                                                      
+Training Phase:  47%|████████████████████████████████████████████████▏                                                     
+Training Phase:  47%|████████████████████████████████████████████████▎                                                     
+Training Phase:  47%|████████████████████████████████████████████████▍                                                     
+Training Phase:  48%|████████████████████████████████████████████████▌                                                     
+Training Phase:  48%|████████████████████████████████████████████████▌                                                     
+Training Phase:  48%|████████████████████████████████████████████████▋                                                     
+Training Phase:  48%|████████████████████████████████████████████████▊                                                     
+Training Phase:  48%|████████████████████████████████████████████████▉                                                     
+Training Phase:  48%|█████████████████████████████████████████████████                                                     
+Training Phase:  48%|█████████████████████████████████████████████████                                                     
+Training Phase:  48%|█████████████████████████████████████████████████▏                                                    
+Training Phase:  48%|█████████████████████████████████████████████████▎                                                    
+Training Phase:  48%|█████████████████████████████████████████████████▍                                                    
+Training Phase:  49%|█████████████████████████████████████████████████▌                                                    
+Training Phase:  49%|█████████████████████████████████████████████████▋                                                    
+Training Phase:  49%|█████████████████████████████████████████████████▋                                                    
+Training Phase:  49%|█████████████████████████████████████████████████▊                                                    
+Training Phase:  49%|█████████████████████████████████████████████████▉                                                    
+Training Phase:  49%|██████████████████████████████████████████████████                                                    
+Training Phase:  49%|██████████████████████████████████████████████████▏                                                   
+Training Phase:  49%|██████████████████████████████████████████████████▏                                                   
+Training Phase:  49%|██████████████████████████████████████████████████▎                                                   
+Training Phase:  49%|██████████████████████████████████████████████████▍                                                   
+Training Phase:  50%|██████████████████████████████████████████████████▌                                                   
+Training Phase:  50%|██████████████████████████████████████████████████▋                                                   
+Training Phase:  50%|██████████████████████████████████████████████████▋                                                   
+Training Phase:  50%|██████████████████████████████████████████████████▊                                                   
+Training Phase:  50%|██████████████████████████████████████████████████▉                                                   
+Training Phase:  50%|███████████████████████████████████████████████████                                                   
+Training Phase:  50%|███████████████████████████████████████████████████▏                                                  
+Training Phase:  50%|███████████████████████████████████████████████████▎                                                  
+Training Phase:  50%|███████████████████████████████████████████████████▎                                                  
+Training Phase:  50%|███████████████████████████████████████████████████▍                                                  
+Training Phase:  51%|███████████████████████████████████████████████████▌                                                  
+Training Phase:  51%|███████████████████████████████████████████████████▋                                                  
+Training Phase:  51%|███████████████████████████████████████████████████▊                                                  
+Training Phase:  51%|███████████████████████████████████████████████████▊                                                  
+Training Phase:  51%|███████████████████████████████████████████████████▉                                                  
+Training Phase:  51%|████████████████████████████████████████████████████                                                  
+Training Phase:  51%|████████████████████████████████████████████████████▏                                                 
+Training Phase:  51%|████████████████████████████████████████████████████▎                                                 
+Training Phase:  51%|████████████████████████████████████████████████████▎                                                 
+Training Phase:  51%|████████████████████████████████████████████████████▍                                                 
+Training Phase:  52%|████████████████████████████████████████████████████▌                                                 
+Training Phase:  52%|████████████████████████████████████████████████████▋                                                 
+Training Phase:  52%|████████████████████████████████████████████████████▊                                                 
+Training Phase:  52%|████████████████████████████████████████████████████▉                                                 
+Training Phase:  52%|████████████████████████████████████████████████████▉                                                 
+Training Phase:  52%|█████████████████████████████████████████████████████                                                 
+Training Phase:  52%|█████████████████████████████████████████████████████▏                                                
+Training Phase:  52%|█████████████████████████████████████████████████████▎                                                
+Training Phase:  52%|█████████████████████████████████████████████████████▍                                                
+Training Phase:  52%|█████████████████████████████████████████████████████▍                                                
+Training Phase:  53%|█████████████████████████████████████████████████████▌                                                
+Training Phase:  53%|█████████████████████████████████████████████████████▋                                                
+Training Phase:  53%|█████████████████████████████████████████████████████▊                                                
+Training Phase:  53%|█████████████████████████████████████████████████████▉                                                
+Training Phase:  53%|█████████████████████████████████████████████████████▉                                                
+Training Phase:  53%|██████████████████████████████████████████████████████                                                
+Training Phase:  53%|██████████████████████████████████████████████████████▏                                               
+Training Phase:  53%|██████████████████████████████████████████████████████▎                                               
+Training Phase:  53%|██████████████████████████████████████████████████████▍                                               
+Training Phase:  53%|██████████████████████████████████████████████████████▌                                               
+Training Phase:  54%|██████████████████████████████████████████████████████▌                                               
+Training Phase:  54%|██████████████████████████████████████████████████████▋                                               
+Training Phase:  54%|██████████████████████████████████████████████████████▊                                               
+Training Phase:  54%|██████████████████████████████████████████████████████▉                                               
+Training Phase:  54%|███████████████████████████████████████████████████████                                               
+Training Phase:  54%|███████████████████████████████████████████████████████                                               
+Training Phase:  54%|███████████████████████████████████████████████████████▏                                              
+Training Phase:  54%|███████████████████████████████████████████████████████▎                                              
+Training Phase:  54%|███████████████████████████████████████████████████████▍                                              
+Training Phase:  54%|███████████████████████████████████████████████████████▌                                              
+Training Phase:  55%|███████████████████████████████████████████████████████▌                                              
+Training Phase:  55%|███████████████████████████████████████████████████████▋
+Training Phase:  55%|███████████████████████████████████████████████████████▊
+Training Phase:  55%|███████████████████████████████████████████████████████▉
+Training Phase:  55%|████████████████████████████████████████████████████████
+Training Phase:  55%|████████████████████████████████████████████████████████▏
+Training Phase:  55%|████████████████████████████████████████████████████████▏
+Training Phase:  55%|████████████████████████████████████████████████████████▎
+Training Phase:  55%|████████████████████████████████████████████████████████▍
+Training Phase:  55%|████████████████████████████████████████████████████████▌                                             | 557/1005 [03:00<02:35,  2.88it/s
+Epoch 210 | Train loss: 0.0394 | Test loss: 0.0635
+Epoch 211 | Train loss: 0.0391 | Test loss: 0.0666
+Epoch 212 | Train loss: 0.0405 | Test loss: 0.0622
+Epoch 213 | Train loss: 0.0398 | Test loss: 0.0619
+Epoch 214 | Train loss: 0.0393 | Test loss: 0.0618
+Epoch 215 | Train loss: 0.0386 | Test loss: 0.0625
+Epoch 216 | Train loss: 0.0393 | Test loss: 0.0623
+Epoch 217 | Train loss: 0.0389 | Test loss: 0.0611
+Epoch 218 | Train loss: 0.0391 | Test loss: 0.0659
+Epoch 219 | Train loss: 0.0386 | Test loss: 0.0647
+Epoch 220 | Train loss: 0.0391 | Test loss: 0.0672
+Epoch 221 | Train loss: 0.0380 | Test loss: 0.0627
+Epoch 222 | Train loss: 0.0373 | Test loss: 0.0625
+Epoch 223 | Train loss: 0.0382 | Test loss: 0.0631
+Epoch 224 | Train loss: 0.0384 | Test loss: 0.0612
+Epoch 225 | Train loss: 0.0385 | Test loss: 0.0689
+Epoch 226 | Train loss: 0.0376 | Test loss: 0.0646
+Epoch 227 | Train loss: 0.0382 | Test loss: 0.0651
+Epoch 228 | Train loss: 0.0375 | Test loss: 0.0623
+Epoch 229 | Train loss: 0.0376 | Test loss: 0.0638
+Epoch 230 | Train loss: 0.0371 | Test loss: 0.0619
+Epoch 231 | Train loss: 0.0379 | Test loss: 0.0649
+Epoch 232 | Train loss: 0.0371 | Test loss: 0.0613
+Epoch 233 | Train loss: 0.0378 | Test loss: 0.0626
+Epoch 234 | Train loss: 0.0370 | Test loss: 0.0621
+Epoch 235 | Train loss: 0.0375 | Test loss: 0.0646
+Epoch 236 | Train loss: 0.0369 | Test loss: 0.0639
+Epoch 237 | Train loss: 0.0380 | Test loss: 0.0622
+Epoch 238 | Train loss: 0.0372 | Test loss: 0.0636
+Epoch 239 | Train loss: 0.0372 | Test loss: 0.0615
+Epoch 240 | Train loss: 0.0364 | Test loss: 0.0681
+Epoch 241 | Train loss: 0.0367 | Test loss: 0.0605
+Epoch 242 | Train loss: 0.0365 | Test loss: 0.0668
+Epoch 243 | Train loss: 0.0367 | Test loss: 0.0653
+Epoch 244 | Train loss: 0.0373 | Test loss: 0.0661
+Epoch 245 | Train loss: 0.0362 | Test loss: 0.0622
+Epoch 246 | Train loss: 0.0364 | Test loss: 0.0600
+Epoch 247 | Train loss: 0.0362 | Test loss: 0.0633
+Epoch 248 | Train loss: 0.0363 | Test loss: 0.0617
+Epoch 249 | Train loss: 0.0363 | Test loss: 0.0639
+Epoch 250 | Train loss: 0.0357 | Test loss: 0.0603
+Epoch 251 | Train loss: 0.0361 | Test loss: 0.0683
+Epoch 252 | Train loss: 0.0360 | Test loss: 0.0638
+Epoch 253 | Train loss: 0.0352 | Test loss: 0.0598
+Epoch 254 | Train loss: 0.0357 | Test loss: 0.0649
+Epoch 255 | Train loss: 0.0356 | Test loss: 0.0614
+Epoch 256 | Train loss: 0.0351 | Test loss: 0.0626
+Epoch 257 | Train loss: 0.0352 | Test loss: 0.0636
+Epoch 258 | Train loss: 0.0363 | Test loss: 0.0616
+Epoch 259 | Train loss: 0.0355 | Test loss: 0.0628
+Epoch 260 | Train loss: 0.0345 | Test loss: 0.0619
+Epoch 261 | Train loss: 0.0357 | Test loss: 0.0618
+Epoch 262 | Train loss: 0.0361 | Test loss: 0.0599
+Epoch 263 | Train loss: 0.0352 | Test loss: 0.0622
+Epoch 264 | Train loss: 0.0348 | Test loss: 0.0604
+Epoch 265 | Train loss: 0.0349 | Test loss: 0.0617
+Epoch 266 | Train loss: 0.0342 | Test loss: 0.0623
+Epoch 267 | Train loss: 0.0345 | Test loss: 0.0633
+Epoch 268 | Train loss: 0.0358 | Test loss: 0.0704
+Epoch 269 | Train loss: 0.0349 | Test loss: 0.0613
+Epoch 270 | Train loss: 0.0343 | Test loss: 0.0616
+Epoch 271 | Train loss: 0.0359 | Test loss: 0.0618
+Epoch 272 | Train loss: 0.0337 | Test loss: 0.0605
+Epoch 273 | Train loss: 0.0344 | Test loss: 0.0594
+Epoch 274 | Train loss: 0.0344 | Test loss: 0.0613
+Epoch 275 | Train loss: 0.0340 | Test loss: 0.0593
+Epoch 276 | Train loss: 0.0351 | Test loss: 0.0695
+Epoch 277 | Train loss: 0.0341 | Test loss: 0.0596
+Epoch 278 | Train loss: 0.0338 | Test loss: 0.0608
+Epoch 279 | Train loss: 0.0341 | Test loss: 0.0602
+Epoch 280 | Train loss: 0.0339 | Test loss: 0.0610
+Epoch 281 | Train loss: 0.0335 | Test loss: 0.0610
+Epoch 282 | Train loss: 0.0329 | Test loss: 0.0610
+Epoch 283 | Train loss: 0.0339 | Test loss: 0.0623
+Epoch 284 | Train loss: 0.0333 | Test loss: 0.0608
+Epoch 285 | Train loss: 0.0337 | Test loss: 0.0607
+Epoch 286 | Train loss: 0.0334 | Test loss: 0.0601
+Epoch 287 | Train loss: 0.0334 | Test loss: 0.0596
+Epoch 288 | Train loss: 0.0340 | Test loss: 0.0617
+Epoch 289 | Train loss: 0.0329 | Test loss: 0.0613
+Epoch 290 | Train loss: 0.0324 | Test loss: 0.0609
+Epoch 291 | Train loss: 0.0335 | Test loss: 0.0619
+Epoch 292 | Train loss: 0.0334 | Test loss: 0.0604
+Epoch 293 | Train loss: 0.0337 | Test loss: 0.0593
+Epoch 294 | Train loss: 0.0329 | Test loss: 0.0609
+Epoch 295 | Train loss: 0.0332 | Test loss: 0.0640
+Epoch 296 | Train loss: 0.0341 | Test loss: 0.0601
+Epoch 297 | Train loss: 0.0321 | Test loss: 0.0598
+Epoch 298 | Train loss: 0.0326 | Test loss: 0.0670
+Epoch 299 | Train loss: 0.0351 | Test loss: 0.0642
+Epoch 300 | Train loss: 0.0332 | Test loss: 0.0602
+Epoch 301 | Train loss: 0.0325 | Test loss: 0.0587
+Epoch 302 | Train loss: 0.0331 | Test loss: 0.0595
+Epoch 303 | Train loss: 0.0322 | Test loss: 0.0638
+Epoch 304 | Train loss: 0.0328 | Test loss: 0.0651                                                                                                             
+Epoch 305 | Train loss: 0.0325 | Test loss: 0.0604
+Epoch 306 | Train loss: 0.0322 | Test loss: 0.0628
+Epoch 307 | Train loss: 0.0324 | Test loss: 0.0624
+Epoch 308 | Train loss: 0.0319 | Test loss: 0.0627
+Epoch 309 | Train loss: 0.0321 | Test loss: 0.0626
+Epoch 310 | Train loss: 0.0324 | Test loss: 0.0613
+Epoch 311 | Train loss: 0.0330 | Test loss: 0.0578
+Epoch 312 | Train loss: 0.0332 | Test loss: 0.0647
+Epoch 313 | Train loss: 0.0328 | Test loss: 0.0646
+Epoch 314 | Train loss: 0.0317 | Test loss: 0.0592
+Epoch 315 | Train loss: 0.0316 | Test loss: 0.0640
+Epoch 316 | Train loss: 0.0322 | Test loss: 0.0623
+Epoch 317 | Train loss: 0.0317 | Test loss: 0.0633
+Epoch 318 | Train loss: 0.0315 | Test loss: 0.0600
+Epoch 319 | Train loss: 0.0315 | Test loss: 0.0601
+Epoch 320 | Train loss: 0.0323 | Test loss: 0.0625
+Epoch 321 | Train loss: 0.0315 | Test loss: 0.0602
+Epoch 322 | Train loss: 0.0323 | Test loss: 0.0623
+Epoch 323 | Train loss: 0.0309 | Test loss: 0.0593
+labelsation Phase:  26%|██████████████████████████▏                                                                          | 104/402 [00:20<00:56,  5.25it/s
+Epoch 324 | Train loss: 0.0310 | Test loss: 0.0605
+Epoch 325 | Train loss: 0.0314 | Test loss: 0.0590
+Epoch 326 | Train loss: 0.0308 | Test loss: 0.0593
+Epoch 327 | Train loss: 0.0305 | Test loss: 0.0631
+Epoch 328 | Train loss: 0.0311 | Test loss: 0.0602
+Epoch 329 | Train loss: 0.0314 | Test loss: 0.0613
+Epoch 330 | Train loss: 0.0320 | Test loss: 0.0613
