@@ -283,6 +283,7 @@ Point cloud reconstruction quality is best evaluated visually, but the repositor
 
 * Experiment with different tools and libraries for point cloud visualization (e.g., Open3D, PyVista).
 * Estimate normal vector for all points in point cloud and use as proxy for color information.
+* Since 2D grid is fixed and needs to deform to 3D space, try to assign color spectrum across the grid. Match colors to final 3D cloud.
 
 ---
 
