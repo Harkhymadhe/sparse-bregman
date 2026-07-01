@@ -201,12 +201,10 @@ python3 src/eval.py
 
 Examples of the trained model reconstructing point clouds can be seen below:
 
-<center>
-<div margin="auto">
+<div style="text-align: center;">
   <img width="30%" height="30%" src="samples/table_bitmap.png" alt="Table Point Clouds (Actual vs. Reconstructed)">
   <img width="30%" height="30%" src="samples/aeroplane_bitmap.png" alt="Aeroplane Point Clouds (Actual vs. Reconstructed)">
 </div>
-</center>
 <p align="center"><strong>Reconstruction examples from trained model</strong></p>
 
 ---
