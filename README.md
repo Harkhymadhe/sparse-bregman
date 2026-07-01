@@ -18,11 +18,15 @@ The objective of this project is twofold:
 
 ### Navigation
 
-[Overview](#project-motivation) •
-[Architecture](#model-architecture) •
-[Implementation](#implementation-details) •
+[Project Motivation](#project-motivation) •
+[Model Architecture](#model-architecture) •
+[Implementation Details](#implementation-details) •
+[Planned Research Extension](#planned-research-extension) •
+[Repository Structure](#repository-structure) •
+[Setup and Installation](#setup-and-installation) •
 [Training](#training) •
-[Results](#example-results) •
+[Evaluation](#evaluation) •
+[Example Results](#example-results) •
 [Issues](#known-issues-and-proposed-improvements) •
 [Future Work](#future-work) •
 [References](#references)
@@ -73,7 +77,7 @@ Key components include:
 The decoder reconstructs the shape through **two folding operations**.
 
 1. Start from a **2D grid**
-2. Concatenate the grid with the latent vector
+2. Concatenate the grid with the latent vector obtained from the encoder.
 3. Apply two successive MLP folding layers
 4. Deform the grid into the final **3D point cloud**
 
@@ -159,7 +163,7 @@ src/data
 
 ---
 
-### Installation
+### Setup and Installation
 
 Just clone the repository, change directory into it and install dependencies via **uv**.
 
@@ -195,22 +199,15 @@ python3 src/eval.py
 
 ### Example Results
 
-*(Visualization examples can be added here after training experiments.)*
+Examples of the trained model reconstructing point clouds can be seen below:
 
-Typical examples include:
-
-* original point cloud
-* reconstructed point cloud
-* training loss curves
-
-Example layout:
-
-```
-Original Shape        Reconstruction
-     ◼                       ◼
-   ◼ ◼ ◼                 ◼ ◼ ◼
-  ◼     ◼               ◼     ◼
-```
+<center>
+<div margin="auto">
+  <img width="30%" height="30%" src="samples/table_bitmap.png" alt="Table Point Clouds (Actual vs. Reconstructed)">
+  <img width="30%" height="30%" src="samples/aeroplane_bitmap.png" alt="Aeroplane Point Clouds (Actual vs. Reconstructed)">
+</div>
+</center>
+<p align="center"><strong>Reconstruction examples from trained model</strong></p>
 
 ---
 
@@ -239,7 +236,7 @@ Potential improvements include:
 * gradient accumulation to simulate larger batch sizes
 * mixed precision training
 * distributed training across multiple GPUs
-* change learning rate to match p with ew batch size
+* change learning rate to match with new batch size
 
 ---
 
@@ -347,6 +344,8 @@ This is already being fixed by:
 
 * Obtaining ShapeNet part dataset with point clouds which contain more the $2048$ points.
 * Implementing 3D point sampling on said dataset.
+
+Work is still ongoing for these fixes.
 
 ---
 
