@@ -1,43 +1,62 @@
-# FoldingNet + Sparse-Bregman
+# FoldingNet + Sparse-Bregman 🧩
 
 ---
 
-![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
-![PyTorch](https://img.shields.io/badge/PyTorch-DeepLearning-red)
-![Status](https://img.shields.io/badge/status-research--project-yellow)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/Python-3.13%2B-3776AB?logo=python\&logoColor=fff\&style=for-the-badge)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-EE4C2C?logo=pytorch\&logoColor=fff\&style=for-the-badge)
+![uv](https://img.shields.io/badge/uv-Package%20Manager-DE5FE9?logo=uv\&logoColor=fff\&style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Research%20Project-F0C419?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-2E8B57?style=for-the-badge)
 
-A clean **from-scratch PyTorch implementation of** FoldingNet from the paper FoldingNet: Point Cloud Auto-encoder via Deep Grid Deformation.
+## Description
 
-The objective of this project is twofold:
+This project is a from-scratch PyTorch implementation of FoldingNet, the point-cloud auto-encoder introduced in *FoldingNet: Point Cloud Auto-encoder via Deep Grid Deformation*. It also explores an alternative optimization strategy: the Sparse Bregman Optimizer, with the goal of comparing it against the optimizer used in the original work.
 
-1. **Reproduce FoldingNet training from scratch**
-2. **Investigate alternative optimization methods**, specifically the Sparse Bregman Optimizer, and compare its performance with the AdamW optimizer used in the original paper.
+FoldingNet learns a global representation of a 3D shape and reconstructs the point cloud by deforming a 2D grid. The research extension investigates whether sparsity can be encouraged through the optimization process rather than solely through objective-function regularization. The Sparse Bregman integration is still in progress, so optimizer comparison experiments have not yet been completed.
 
----
+## Table of Contents
 
-### Navigation
+* [Description](#description)
+* [Features](#features)
+* [Tech Stack](#tech-stack)
+* [Project Motivation](#project-motivation)
+    * [Academic](#1-academic)
+    * [Personal](#2-personal)
+* [Model Architecture](#model-architecture)
+* [Installation](#installation)
+* [Usage](#usage)
 
-[Project Motivation](#project-motivation) •
-[Model Architecture](#model-architecture) •
-[Implementation Details](#implementation-details) •
-[Planned Research Extension](#planned-research-extension) •
-[Repository Structure](#repository-structure) •
-[Setup and Installation](#setup-and-installation) •
-[Training](#training) •
-[Evaluation](#evaluation) •
-[Example Results](#example-results) •
-[Issues](#known-issues-and-proposed-improvements) •
-[Future Work](#future-work) •
-[References](#references)
+  * [Dataset](#dataset)
+  * [Configuration](#configuration)
+  * [Training](#training)
+  * [Evaluation](#evaluation)
+* [Project Structure](#project-structure)
+* [Example Results](#example-results)
+* [Known Issues and Future Work](#known-issues-and-future-work)
+* [References](#references)
+* [License](#license)
 
----
+## Features
 
-### Project Motivation
+* 🧠 **FoldingNet implementation:** Point-cloud encoder and folding-based decoder based on the original paper.
+* 🔷 **Grid-based reconstruction:** Deforms a 2D grid into a reconstructed 3D point cloud.
+* 📦 **ShapeNetPart data support:** Uses the HDF5 and/or .npz ShapeNetPart dataset layout.
+* ⚙️ **Optimizer research:** Includes the default optimizer used by the project and an ongoing Sparse Bregman optimizer integration.
+* 🚀 **Performance Profiling and Optimization:** Features NVTX instrumentation for profiling.
+* 🧪 **Training and evaluation entry points:** Run the model with `src/main.py` and evaluate it with `src/eval.py`.
+
+## Tech Stack
+
+* **Core:** Python 3.13+, PyTorch
+* **Dependency management:** uv
+* **Model domain:** 3D point clouds and deep learning
+* **Dataset format:** HDF5, NumPy zipped files (.npz)
+
+## Project Motivation
 
 There are two motivational drivers that inform this project: academic and personal.
 
-#### 1. Academic
+### 1. Academic
 
 3D point clouds are a fundamental representation used in areas such as:
 
@@ -52,63 +71,92 @@ Beyond the data modality and model architecture, optimization strategies are a v
 
 The Bregman framework is the answer to this question. This optimization framework allows neural networks to be trained from scratch, such that the optimization process only yields non-zero parameters when special mathematical circumstances necessitate this. This enforces sparsity as an internal measure of the optimization process itself.
 
-#### 2. Personal
+### 2. Personal
 
 This project stands as a dive into the worlds of point clouds and 3D data science. It also serves to link this space  to the field of graph processing, which is of strong interest.
 
----
+## Model Architecture
 
-### Model Architecture
+The implementation follows the architecture proposed in the original FoldingNet paper.
 
-The implementation follows the architecture proposed in the original paper.
+### Encoder
 
-#### Encoder
+The encoder extracts a global shape descriptor from the input point cloud using:
 
-The encoder extracts a **global shape descriptor** from the input point cloud.
+* Graph-based feature extraction
+* Local covariance features
+* Global max pooling
 
-Key components include:
+### Folding-Based Decoder
 
-* graph-based feature extraction
-* local covariance features
-* global max pooling for shape representation
+The decoder reconstructs the shape through two folding operations:
 
-#### Decoder (Folding-Based)
-
-The decoder reconstructs the shape through **two folding operations**.
-
-1. Start from a **2D grid**
-2. Concatenate the grid with the latent vector obtained from the encoder.
-3. Apply two successive MLP folding layers
-4. Deform the grid into the final **3D point cloud**
+1. Begin with a 2D grid.
+2. Concatenate the grid with the encoder's latent vector.
+3. Apply two successive MLP folding layers.
+4. Deform the grid into the reconstructed 3D point cloud.
 
 <img src="https://i-blog.csdnimg.cn/blog_migrate/898b9d776cf522b39053ad6edf9d0882.png" alt="FoldingNet architecture">
-<p align="center"><strong>FoldingNet Architecture</strong></p>
-
----
+<p align="center"><strong>FoldingNet architecture</strong></p>
 
 ### Implementation Details
 
-The implementation follows the hyperparameters described in the original paper with **one modification**. The batch size was set to **16** instead of **1** due need for training speedups. All other architectural and training settings were kept consistent with the original work.
+The implementation follows the hyperparameters described in the original paper, with one stated modification: the batch size is $16$ rather than $1$ to improve training speed. Other architectural and training settings are intended to remain consistent with the original work.
 
----
+## Installation
 
-### Planned Research Extension
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and Python 3.13 or later, then clone the repository and install its dependencies:
 
-The original objective of this project was to evaluate the effect of **alternative optimization strategies** on the performance of the model. In particular, the project aims to integrate the Sparse Bregman Optimizer (a special optimization algorithm) for natively training sparse neural networks.
+```bash
+git clone https://github.com/Harkhymadhe/sparse-bregman.git
+cd sparse-bregman
+uv pip install -e .
+```
 
-The goal of this experiment is to investigate:
+## Usage
 
-* reconstruction quality improvements
-* convergence behavior
-* training stability compared to the optimizer used in the original paper
+### Dataset
 
-⚠️ The Sparse Bregman optimizer integration is **currently incomplete**, therefore the comparison experiments have not yet been conducted.
+> [!Important]
+ > The dataset is obtained from Baidu and should be decompressed into the repository's `src/data/` directory. The expected dataset folder is `shapenetpart_hdf5_2048`; see [Project Structure](#project-structure) for the file layout.
 
----
+### Configuration
 
-### Repository Structure
+Training and evaluation hyperparameters are currently configured in `src/main.py` and `src/eval.py`. Edit the relevant script parameters before running an experiment.
 
-The repository tree is as below:
+### Training
+
+Start model training with one of the below:
+
+```bash
+python3 src/main.py
+```
+
+```bash
+make run
+```
+
+### Evaluation
+
+Evaluate trained model with:
+
+```bash
+python3 src/eval.py
+```
+
+```bash
+make eval
+```
+
+### Profiling
+
+To profile the performance of the training process, the `main.py` script is annotated via **NVTX**. To execute the profiling script, run the below:
+
+```bash
+make profile
+```
+
+## Project Structure
 
 ```text
 .
@@ -116,256 +164,76 @@ The repository tree is as below:
 ├── README.md
 ├── notebook.ipynb
 ├── pyproject.toml
-└── src
-    ├── artefacts
-    ├── data
+└── src/
+    ├── artefacts/
+    ├── data/
+    │   └── shapenetpart_hdf5_2048/
+    │       ├── test0.h5
+    │       ├── test0_id2file.json
+    │       ├── test0_id2name.json
+    │       ├── test1.h5
+    │       ├── test1_id2file.json
+    │       ├── test1_id2name.json
+    │       ├── train0.h5
+    │       ├── train0_id2file.json
+    │       ├── train0_id2name.json
+    │       ├── train1.h5
+    │       ├── train1_id2file.json
+    │       ├── train1_id2name.json
+    │       ├── train2.h5 ... train5.h5 and corresponding JSON files
+    │       └── val0.h5 and corresponding JSON files
     ├── eval.py
-    ├── logs
+    ├── logs/
     ├── main.py
-    └── sparse_bregman
+    └── sparse_bregman/
 ```
 
-**NOTE**: The dataset is downloaded from Baidu and then decompressed into the data directory. As can be seen below, the data subdirectory has the following directory tree:
+The dataset tree above is abbreviated for readability.
 
-```text
-src/data
-└── shapenetpart_hdf5_2048
-    ├── test0.h5
-    ├── test0_id2file.json
-    ├── test0_id2name.json
-    ├── test1.h5
-    ├── test1_id2file.json
-    ├── test1_id2name.json
-    ├── train0.h5
-    ├── train0_id2file.json
-    ├── train0_id2name.json
-    ├── train1.h5
-    ├── train1_id2file.json
-    ├── train1_id2name.json
-    ├── train2.h5
-    ├── train2_id2file.json
-    ├── train2_id2name.json
-    ├── train3.h5
-    ├── train3_id2file.json
-    ├── train3_id2name.json
-    ├── train4.h5
-    ├── train4_id2file.json
-    ├── train4_id2name.json
-    ├── train5.h5
-    ├── train5_id2file.json
-    ├── train5_id2name.json
-    ├── val0.h5
-    ├── val0_id2file.json
-    └── val0_id2name.json
+## Example Results
 
-83 directories, 30 files
-```
-
----
-
-### Setup and Installation
-
-Just clone the repository, change directory into it and install dependencies via **uv**.
-
-```bash
-git clone https://dagshub.com/Harkhymadhe/sparse-bregman.git
-
-cd sparse-bregman
-
-uv pip install -e .
-```
-
----
-
-### Training
-
-To train the model:
-
-```bash
-python3 src/main.py
-```
-
-Configuration parameters can be modified in the ```main.py``` script.
-
-### Evaluation
-
-To evaluate the trained model:
-
-```bash
-python3 src/eval.py
-```
-
----
-
-### Example Results
-
-Examples of the trained model reconstructing point clouds can be seen below:
+The following images show examples of point clouds reconstructed by the trained model:
 
 <p align="center">
-  <img width="30%" src="samples/table_bitmap.png" alt="Table Point Clouds (Actual vs. Reconstructed)">
-  <img width="30%" src="samples/aeroplane_bitmap.png" alt="Aeroplane Point Clouds (Actual vs. Reconstructed)">
+  <img width="30%" src="samples/table_bitmap.png" alt="Table point clouds: actual vs. reconstructed">
+  <img width="30%" src="samples/aeroplane_bitmap.png" alt="Aeroplane point clouds: actual vs. reconstructed">
 </p>
-<p align="center"><strong>Reconstruction examples from trained model</strong></p>
+<p align="center"><strong>Reconstruction examples from the trained model</strong></p>
 
----
+## Known Issues and Future Work
 
-### Known Issues and Proposed Improvements
+This repository is currently focused on architectural reproduction. The following limitations remain and identify potential next steps.
 
-During development and experimentation with FoldingNet, several limitations and implementation challenges were identified. This section documents those issues along with potential improvements.
+### Sparse Bregman Optimizer Integration
 
----
+The optimizer comparison is incomplete. At present, only `LinearBregmanOptimizer` and the default AdamW optimizer are supported; other Bregman optimization schemes are still a work in progress. Complete the update rules, integrate the optimizer variants into the training pipeline, and run controlled comparisons of reconstruction quality, convergence, and stability.
 
-#### 1. Batch Size
+### Training and Benchmarking
 
-**Issue**
+The implementation uses batch size $16$ instead of the original batch size $1$, which changes the number of iterations and may affect gradient stability, convergence, and reconstruction quality. Investigate the effect of batch size and learning-rate adjustments; gradient accumulation, mixed precision, and multi-GPU training are possible avenues. Broader benchmarking should also include standard point-cloud datasets, comparisons with the FoldingNet paper, and ablation studies.
 
-The original work used a batch size of $1$, while this implementation uses a batch size of $16$. This results in a very different number of iterations total.
+### Reproducibility and Logging
 
-This likely may have influenced:
+Experiment settings are embedded in `main.py` and `eval.py`, and logging is currently limited to terminal output. Add explicit random seeds, move hyperparameters into a separate configuration mechanism (for example, argparse, YAML, or dataclasses), and introduce structured experiment logging such as Loguru, TensorBoard, or Weights & Biases.
 
-* gradient stability
-* convergence speed
-* final reconstruction performance
+### Objective Function
 
-**Possible Fixes**
+The project uses a custom form of Chamfer distance. Verify its implementation and assess whether alternative aggregation modes, in addition to the current sum, affect training or reconstruction quality.
 
-Potential improvements include:
+### Visualization and Data Augmentation
 
-* gradient accumulation to simulate larger batch sizes
-* mixed precision training
-* distributed training across multiple GPUs
-* change learning rate to match with new batch size
+Add integrated point-cloud visualization (for example, with Open3D or PyVista) and investigate ways to communicate point-level structure, such as estimated normals or colors associated with the deformed grid. Data augmentation is also a potential improvement; options include point subsampling, coordinate jitter, and cloud rotation.
 
----
+### Grid Granularity and Point-Cloud Size
 
-#### 2. Incomplete Sparse Bregman Optimizer Integration
+The grid range was changed from approximately `[-22.5, 22.5]` to `[-3.0, 3.0]`, with the smaller range observed to produce better visual results. Further experiments are needed to test this hypothesis systematically. The current HDF5 data is limited to at most 2,048 points per cloud; work is ongoing to obtain higher-resolution data and implement point sampling.
 
-**Issue**
-
-The comparison between the optimizer used in the original work and the Sparse Bregman Optimizer has not yet been completed.
-
-This is due to the fact that of all the Bregman optimization schemes, only the Linear Bregman functions appropriately; the others are still a work in progress. As a result, the current implementation only supports the **LinearBregmanOptimizer** and the default optimizer used in the original FoldingNet paper (AdamW).
-
-**Possible Fixes**
-
-* Complete implementation of Sparse Bregman update rules.
-* Integrate the optimizer(s) into the PyTorch training pipeline
-* Conduct controlled optimizer comparison experiments
-
----
-
-#### 3. Limited Experimentation and Benchmarking
-
-**Issue**
-
-The current repository focuses mainly on **architectural reproduction**, and extensive benchmarking has not yet been conducted. As such, it is currently missing full training benchmarks, dataset comparisons and performance curves.
-
-**Possible Fixes**
-
-Future experiments should include:
-
-* training on standard point cloud datasets
-* comparison with results reported in the FoldingNet paper
-* ablation studies on encoder and decoder components
-
----
-
-#### 4. Visualization Tools
-
-**Issue**
-
-Point cloud reconstruction quality is best evaluated visually, but the repository currently lacks integrated visualization tools. In addition, it would make more visual sense to display the point cloud with some color information.
-
-**Possible Fixes**
-
-* Experiment with different tools and libraries for point cloud visualization (e.g., Open3D, PyVista).
-* Estimate normal vector for all points in point cloud and use as proxy for color information.
-* Since 2D grid is fixed and needs to deform to 3D space, try to assign color spectrum across the grid. Match colors to final 3D cloud.
-
----
-
-#### 5. Reproducibility and Logging
-
-**Issue**
-
-Reproducibility is important for research projects, but presently experiment configuration management is currently limited. The hyperparameters are embedded directly in the ```main.py``` and ```eval.py``` files and this is not best practice. In addition, there are no real logs, beyond just a copy of the outputs emitted to the ternminal during training.
-
-**Possible Fixes**
-
-* Set seed for training.
-* Decouple experiment hyperparameters and configuration from actual code. This can be done with:
-  * Argparse
-  * YAML
-  * Dataclasses
-* Configure logging. Possible tools for this include:
-  * Loguru
-  * Tensorboard
-  * Weights & Biases (W&B)
-
----
-
-#### 6. Objective Function
-
-**Issue**
-
-The objective function is an important cornerstone for the training process. The wrong function will likely lead to the wrong results. For this project, the objective function is a custom-designed form of the Chamfer's distance.
-
-**Possible Fixes**
-
-* Confirm that the extended Chamfer distance is implemented correctly.
-* Experiment with different aggregation modes for the objective function (presently using sum).
-
----
-
-#### 7. Grid Granularity
-
-**Issue**
-
-For the FoldingNet, the 2D grid must be deformed into 3D space to give the point cloud. The deformation (i.e., squeezing, cutting and folding) of this grid is guided by a  provided codeword, an embedding extracted from another point cloud, which represents an "idea" of what our 2D grid needs to be deformed into looking like.
-
-First training experiments were done with the grid values between $-22.5$ and $22.5$. They were later done with values between $-3.0$ and $3.0$. It was visually observed that the second range yielded better outputs. It is hypothesized that this is because for a point cloud with coordinates in the range $-1.0$ to $1.0$, a 2D grid within the smaller range would have less deformation to undergo in order to conform to an appropriate 3D configuration.
-
-**Possible Fixes**
-
-* Do more extensive experimentation with grid granularity.
-* Attempt to explore this hypothesis further.
-
----
-
-#### 8. Point Cloud Size
-
-**Issue**
-
-Presently, using the **h5** ShapeNetPart dataset, the point clouds are restricted to $\le 2048$ points. This restricts the ability to experiment with higher fidelity point clouds.
-
-**Possible Fixes**
-
-This is already being fixed by:
-
-* Obtaining ShapeNet part dataset with point clouds which contain more the $2048$ points.
-* Implementing 3D point sampling on said dataset.
-
-Work is still ongoing for these fixes.
-
----
-
-#### 9. Data Augmentation
-
-**Issue**
-
-Presently, in keeping with the  original FoldingNet paper, there is no augmentation applied to the point clouds. This would be a good idea to implement however, as it makes for a more robust model. Examples of augmentations that can be applied to the point clouds include:
-
-1. Point subsampling (i.e., trying to artificially force the model to reconstruct meaningfully, even with hazy inputs).
-2. Point jittering (i.e., adding random noise to the 3D coordinates of the points in the cloud; makes for model robustness).
-3. Cloud rotation (i.e., reconstruction should be possible, irrespective of the cloud's orientation).
-
-**Possible Fixes**
-
-Implement data augmentation schemes as suggested and train again.
-
----
-
-### References
+## References
 
 1. [FoldingNet: Point Cloud Auto-encoder via Deep Grid Deformation (2019)](https://arxiv.org/abs/1712.07262)
 2. [A Bregman Learning Framework for Sparse Neural Networks (2024)](https://jmlr.org/papers/v23/21-0545.html)
+
+## License
+
+The project README identifies the license as MIT. See `LICENCE.md` for the license text.
+
