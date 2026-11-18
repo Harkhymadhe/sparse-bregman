@@ -104,10 +104,9 @@ class ProximalGDOptimizer(Optimizer):
             regularizer = group["regularizer"]
 
             for param in group["params"]:
-
                 if param.grad is None:
                     continue
-                
+
                 grad = param.grad.data
 
                 param.data.add_(-lr * grad)
@@ -185,7 +184,9 @@ class AdaBregmanOptimizer(Optimizer):
                 # state["v"] = v
 
                 # Update parameters using proximity operator on subgrad and delta
-                param.data = regularizer.proximity_operator(x=delta * v.data, delta=delta)
+                param.data = regularizer.proximity_operator(
+                    x=delta * v.data, delta=delta
+                )
 
         return self
 
