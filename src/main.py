@@ -188,12 +188,8 @@ def main(cfg: DictConfig):
         with nvtx.annotate(f"Epoch #{epoch}", color="lightgrey"):
             # Iterate over training data batch
             for batch in tqdm(train_dl, desc="Training Phase", position=1, leave=LEAVE):
-                # for batch in iter(train_dl):
+                
                 iteration += 1
-
-                if iteration == 3:
-                    cuda_profiler.cudaProfilerStop()
-                    break
 
                 with nvtx.annotate(f"Batch #{iteration}", color="goldenrod"):
                     with nvtx.annotate("Data to CUDA", color="limegreen"):
