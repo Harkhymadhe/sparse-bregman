@@ -6,89 +6,188 @@ from torch.optim import Optimizer
 from torch.autograd import grad
 from torch import nn
 
-__all__ = ["LinearBregmanOptimizer"]
+from sparse_bregman.optim.sparsity import SparsityEnforcer, NullSparsityEnforcer
+
+__all__ = ["LinearBregmanOptimizer", "ProximalGDOptimizer", "AdaBregmanOptimizer"]
 
 
 class LinearBregmanOptimizer(Optimizer):
     def __init__(
         self,
         parameters,
-        delta: int = 1,
-        weight: float = 1.0,
-        l1_norm: bool = True,
         lr: float = 1e-3,
+        momentum: float = 0.0,
+        delta: int = 1,
+        regularizer: SparsityEnforcer = NullSparsityEnforcer(),
         *args,
         **kwargs,
     ):
-        super().__init__(parameters, *args, **kwargs, defaults={"lr": lr})
+        defaults = {
+            "lr": lr,
+            "delta": delta,
+            "momentum": momentum,
+            "regularizer": regularizer,
+        }
+        super().__init__(parameters, *args, **kwargs, defaults=defaults)
 
-        self.delta = delta
-        self.weight = weight
-        self.l1_norm = l1_norm
-
-        total_J = self.J()
-        print("Total J: ", total_J)
-        J_grad = self.sub_gradients(J=total_J)
-
-        print("J_grad: ", J_grad)
-
-        with torch.no_grad():
-            self.v_groups = (
-                {
-                    "params": [
-                        J_grad + v.detach().data.abs() / self.delta
-                        for v in group["params"]
-                    ]
-                }
-                for group in self.param_groups
-            )
-
-    def sub_gradients(self, J: torch.Tensor):
-        J_grad = grad(
-            outputs=J,
-            inputs=[p for group in self.param_groups for p in group["params"]],
-        )
-        return J_grad
-
-    def proximity_ops(self, v: torch.Tensor) -> torch.Tensor:
-        v_ = v.abs() - self.weight
-        return self.delta * torch.sign(v) * torch.where(v_ > 0, v_, 0)
-
-    def _l1_norm_J(self, parameter: torch.Tensor):
-        return parameter.abs().sum()
-
-    def _l2_norm_J(self, parameter: torch.Tensor):
-        n_g = parameter.numel()
-        norm = torch.pow((parameter**2).sum(), 0.5)
-        return (n_g**0.5) * norm
-
-    # @torch.no_grad()
-    def J(self):
-        norm_func = self._l1_norm_J if self.l1_norm else self._l2_norm_J
-        total_j = torch.tensor(0.0, requires_grad=True)
-
-        for group in self.param_groups:
-            for v in group["params"]:
-                # norm = norm_func(v.detach())
-                norm = norm_func(v)
-                print("Norm: ", norm)
-                total_j = total_j + norm
-
-        return self.weight * total_j
-
+    @torch.no_grad()
     def step(self):
-        for p_group, v_group in zip(self.param_groups, self.v_groups):
-            for param, v in zip(p_group["params"], v_group):
-                # v = param.data / self.delta
-                v = v - self.lr * param.grad.data
-                param.data = self.proximity_ops(v=v)
-                # param.grad = None
-        return
-
-    def zero_grad(self):
+        # Extract each parameter group for processing
         for group in self.param_groups:
-            for p in group["params"]:
-                p.grad = None
+            # Extract specific values per group
+            delta = group["delta"]
+            lr = group["lr"]
+            momentum = group["momentum"]
+            regularizer = group["regularizer"]
+
+            for param in group["params"]:
+                if param.grad is None:
+                    continue
+
+                grad = param.grad.data
+                state = self.state[param]
+
+                # Initialize parameter state if empty
+                if len(state) == 0:
+                    state["v"] = regularizer.initialize_sub_gradient(param, delta=delta)
+                    state["m"] = None
+
+                # Process subgradient with or without momentum
+                if momentum > 0.0:
+                    m = state["m"]
+
+                    if m is None:
+                        m = torch.zeros_like(grad)
+
+                    m.mul_(momentum)
+                    m.add_(lr * (1 - momentum) * grad)
+
+                    state["m"] = m
+                    state["v"].add_(-m)
+                else:
+                    state["v"].add_(-lr * grad)
+
+                # Update parameters using proximity operator on subgrad and delta
+                param.data = regularizer.proximity_operator(
+                    x=delta * state["v"], delta=delta
+                )
+
+        return self
+
+
+class ProximalGDOptimizer(Optimizer):
+    def __init__(
+        self,
+        parameters,
+        lr: float = 1e-3,
+        momentum: float = 0.0,
+        delta: int = 1,
+        regularizer: SparsityEnforcer = NullSparsityEnforcer(),
+        *args,
+        **kwargs,
+    ):
+        defaults = {
+            "lr": lr,
+            "momentum": momentum,
+            "delta": delta,
+            "regularizer": regularizer,
+        }
+
+        super().__init__(parameters, *args, **kwargs, defaults=defaults)
+
+    @torch.no_grad()
+    def step(self, closure=None):
+        for group in self.param_groups:
+            lr = group["lr"]
+            delta = group["delta"]
+            momentum = group["momentum"]
+            regularizer = group["regularizer"]
+
+            for param in group["params"]:
+
+                if param.grad is None:
+                    continue
+                
+                grad = param.grad.data
+
+                param.data.add_(-lr * grad)
+                param.data = regularizer.proximity_operator(x=param.data, delta=lr)
+
+        return self
+
+
+class AdaBregmanOptimizer(Optimizer):
+    def __init__(
+        self,
+        parameters,
+        lr: float = 1e-3,
+        betas: tuple[float] = (0.9, 0.999),
+        epsilon: float = 1e-8,
+        delta: int = 1,
+        regularizer: SparsityEnforcer = NullSparsityEnforcer(),
+        *args,
+        **kwargs,
+    ):
+        defaults = {
+            "lr": lr,
+            "betas": betas,
+            "delta": delta,
+            "epsilon": epsilon,
+            "regularizer": regularizer,
+        }
+
+        super().__init__(parameters, *args, **kwargs, defaults=defaults)
+
+    @torch.no_grad()
+    def step(self, closure=None):
+        for group in self.param_groups:
+            lr = group["lr"]
+            delta = group["delta"]
+            betas = group["betas"]
+            regularizer = group["regularizer"]
+            epsilon = group["epsilon"]
+
+            for param in group["params"]:
+                grad = param.grad.data
+                state = self.state[param]
+
+                if grad is None:
+                    continue
+
+                if len(state) == 0:
+                    state["step"] = 1
+                    state["m1"] = torch.zeros_like(grad)
+                    state["m2"] = torch.zeros_like(grad)
+                    state["v"] = torch.zeros_like(grad)
+
+                k = state["step"]
+                v = state["v"]
+
+                m1 = state["m1"]
+                m2 = state["m2"]
+
+                # Update momentum buffers
+                m1.mul_(betas[0]).add_((1 - betas[0]) * grad)
+
+                m2.mul_(betas[1]).add_((1 - betas[1]) * grad**2)
+
+                # Bias correction for buffers
+                m1.div_(1 - betas[0] ** k)
+                m2.div_(1 - betas[1] ** k)
+
+                # Update subgradient
+                v.add_(-lr * m1 / (m2**0.5 + epsilon))
+
+                state["step"] += 1
+
+                # state["m1"] = m1
+                # state["m2"] = m2
+                # state["v"] = v
+
+                # Update parameters using proximity operator on subgrad and delta
+                param.data = regularizer.proximity_operator(x=delta * v.data, delta=delta)
+
+        return self
 
 
 if __name__ == "__main__":
