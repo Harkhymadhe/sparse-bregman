@@ -19,8 +19,7 @@ NUM_REPORTS=$(ls -1 ~/nsys_profiles/sparse-bregman | wc -l)
 ID=$($RANDOM | md5sum | head -c 20)
 
 # Create a new directory for the current report and move the generated report files into it
-mkdir -p ~/nsys_profiles/reports/report-$NUM_REPORTS-$ID
-mv ~/nsys_profiles/report.nsys-rep ~/nsys_profiles/sparse-bregman/report-$NUM_REPORTS/sparse-bregman-report.nsys-rep
+mkdir -p ~/nsys_profiles/sparse-bregman/report-$NUM_REPORTS
+rm -rf ~/nsys_profiles/sparse-bregman/*.Identifier
+mv ~/nsys_profiles/sparse-bregman/report.nsys-rep ~/nsys_profiles/sparse-bregman/report-$NUM_REPORTS/sparse-bregman-report.nsys-rep
 # mv ~/nsys_profiles/report.sqlite ~/nsys_profiles/sparse-bregman/report-$NUM_REPORTS-$ID/report.sqlite
-
-rm ~/nsys_profiles/*.Identifier || echo
