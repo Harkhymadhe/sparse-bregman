@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import torch
+from torch import nn
 
-from torch import nn, optim
 from sparse_bregman.optim.regularizers import *
 
 __all__ = [
-    "SparsityEnforcer",
-    "NullSparsityEnforcer",
-    "L1SparsityEnforcer",
     "L1L2SparsityEnforcer",
+    "L1SparsityEnforcer",
+    "NullSparsityEnforcer",
+    "SparsityEnforcer",
 ]
 
 

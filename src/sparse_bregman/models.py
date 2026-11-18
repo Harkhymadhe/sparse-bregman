@@ -2,8 +2,8 @@
 
 from torch import nn
 
-from sparse_bregman.encoder import FoldingEncoder
 from sparse_bregman.decoder import FoldingDecoder
+from sparse_bregman.encoder import FoldingEncoder
 
 __all__ = ["FoldingAutoEncoder"]
 

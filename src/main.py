@@ -1,31 +1,25 @@
 # -*- coding: utf-8 -*-
 
 import os
-import torch
 
 import nvtx
-
-from torch.utils.data import DataLoader
+import torch
+from rich import print
 from torch import optim
 from torch.cuda import cudart
-
-from sparse_bregman.data import (
-    NumpyShapeNetPartDataset,
-    H5ShapeNetPartDataset,
-)
-from sparse_bregman.models import FoldingAutoEncoder
-from sparse_bregman.loss import ExtendedChamferDistanceLoss
-from sparse_bregman.optim import (
-    LinearBregmanOptimizer,
-    ProximalGDOptimizer,
-    AdaBregmanOptimizer,
-)
-from sparse_bregman.optim.sparsity import NullSparsityEnforcer, L1SparsityEnforcer
-from sparse_bregman.utils import point_cloud_collate_function, OptimizerError
-
+from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from rich import print
+from sparse_bregman.data import H5ShapeNetPartDataset
+from sparse_bregman.loss import ExtendedChamferDistanceLoss
+from sparse_bregman.models import FoldingAutoEncoder
+from sparse_bregman.optim import (
+    AdaBregmanOptimizer,
+    LinearBregmanOptimizer,
+    ProximalGDOptimizer,
+)
+from sparse_bregman.optim.sparsity import L1SparsityEnforcer
+from sparse_bregman.utils import OptimizerError, point_cloud_collate_function
 
 if __name__ == "__main__":
     torch.set_float32_matmul_precision("high")
@@ -152,27 +146,31 @@ if __name__ == "__main__":
             # for batch in iter(train_dl):
             iteration += 1
 
-            with nvtx.annotate(f"Batch #{iteration} to CUDA", color = "limegreen"):
+            with nvtx.annotate(f"Batch #{iteration} to CUDA", color="limegreen"):
                 # Move batch to device
                 X = batch[0].to(device)
 
             # Inference and loss calculation
-            with nvtx.annotate(f"Batch #{iteration} forward pass", color = "darkviolet"):
+            with nvtx.annotate(f"Batch #{iteration} forward pass", color="darkviolet"):
                 X_hat = model(X)
-            
-            with nvtx.annotate(f"Batch #{iteration} loss computation", color = "violet"): 
+
+            with nvtx.annotate(f"Batch #{iteration} loss computation", color="violet"):
                 loss = loss_fn(X, X_hat)
 
             # Backpropragation of the loss
-            with nvtx.annotate(f"Batch #{iteration} backpropagation", color = "cornflowerblue"):
+            with nvtx.annotate(
+                f"Batch #{iteration} backpropagation", color="cornflowerblue"
+            ):
                 loss.backward()
 
             # Gradient descent
-            with nvtx.annotate(f"Batch #{iteration} gradient descent", color = "royalblue"):
+            with nvtx.annotate(
+                f"Batch #{iteration} gradient descent", color="royalblue"
+            ):
                 optimizer.step()
 
             # Clear out gradients
-            with nvtx.annotate(f"Batch #{iteration} zero.grad", color = "palegoldenrod"):
+            with nvtx.annotate(f"Batch #{iteration} zero.grad", color="palegoldenrod"):
                 optimizer.zero_grad()
 
             # Log loss to tracking sequence
@@ -194,7 +192,7 @@ if __name__ == "__main__":
         model.eval()
 
         # Turn off gradients and computational graph
-        with nvtx.annotate(f"Eval process", color = "purple"), torch.no_grad():
+        with nvtx.annotate("Eval process", color="purple"), torch.no_grad():
             # Run eval loop
             for batch in tqdm(
                 test_dl, desc="Evaluation Phase", position=1, leave=LEAVE

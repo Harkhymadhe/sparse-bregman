@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import os
-import h5py
-
-import numpy as np
-import torch
-
-from torch import Tensor
 from random import shuffle
 
-from torch.utils.data import Dataset, DataLoader
+import h5py
+import numpy as np
+import torch
+from torch import Tensor
+from torch.utils.data import Dataset
+
 from sparse_bregman.utils import load_json_label_file
 
-__all__ = ["NumpyShapeNetPartDataset", "H5ShapeNetPartDataset"]
+__all__ = ["H5ShapeNetPartDataset", "NumpyShapeNetPartDataset"]
 
 
 class NumpyShapeNetPartDataset(Dataset):
@@ -48,7 +47,7 @@ class NumpyShapeNetPartDataset(Dataset):
         )
 
         with open(categorymap, "r") as f:
-            lines = {l.split("\t")[-1].strip(): l.split("\t")[0] for l in f.readlines()}
+            lines = {l.split("\t")[-1].strip(): l.split("\t")[0] for l in f}
 
         self.categorymap = lines
 
@@ -91,7 +90,6 @@ class NumpyShapeNetPartDataset(Dataset):
 
     def push(self, index, data, label):
         self.cache[index] = (data, label)
-        return
 
     def normalize_cloud(self, data):
         # normalize into a sphere with origin (0, 0, 0) and radius 1.
@@ -149,7 +147,7 @@ class NumpyShapeNetPartDataset(Dataset):
             NumpyShapeNetPartDataset(
                 path=self.path,
                 num_points=self.num_points,
-                files=test_files,
+                files=train_files,
                 cache_size=self.cache_size,
                 normalize=self.normalize,
             ),
@@ -215,7 +213,7 @@ class H5ShapeNetPartDataset(Dataset):
         for f in label_files:
             unique_labels.update(set(load_json_label_file(f)))
 
-        unique_labels = sorted(list(unique_labels))
+        unique_labels = sorted(unique_labels)
 
         self.label2index = dict(zip(unique_labels, range(len(unique_labels))))
         self.index2label = {v: k for k, v in self.label2index.items()}

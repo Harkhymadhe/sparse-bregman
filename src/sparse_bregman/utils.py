@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 
 import json
-import torch
 
-import numpy as np
 import matplotlib.pyplot as plt
-
-from mpl_toolkits.mplot3d import Axes3D
-
+import numpy as np
+import torch
 from torch import Tensor
-from torch_geometric.data import Data
+from torch_geometric.data import Batch, Data
 
 __all__ = [
-    "_create_graph",
     "_create_batch_graph",
+    "_create_graph",
     "_local_covariance_knn",
-    "local_covariance_knn",
     "generate_2d_grid",
+    "local_covariance_knn",
     "point_cloud_collate_function",
 ]
 
@@ -146,7 +143,6 @@ def display_point_cloud(point_cloud, title: str = "Image Title"):
     ax.set_title(title)
 
     plt.show()
-    return
 
 
 def load_state_dict(path: str, device: str = "cpu"):

@@ -2,12 +2,9 @@
 
 import os
 
-import numpy as np
 import torch
 
-from sparse_bregman.utils import display_point_cloud, load_json_label_file
-
-from sparse_bregman.data import NumpyShapeNetPartDataset, H5ShapeNetPartDataset
+from sparse_bregman.data import H5ShapeNetPartDataset, NumpyShapeNetPartDataset
 from sparse_bregman.models import FoldingAutoEncoder
 from sparse_bregman.utils import display_point_cloud, load_state_dict
 

@@ -3,12 +3,13 @@
 all: format run
 
 format:
-	@ruff format src/sparse_bregman
+	@isort src/
+	@ruff format src/
 
 run:
 	@python3 src/main.py
 
-run:
+eval:
 	@python3 src/eval.py
 
 profile:

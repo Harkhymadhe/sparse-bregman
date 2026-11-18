@@ -1,23 +1,18 @@
 # -*- coding: utf-8 -*-
 
-import numpy as np
 import torch
-
-from torch_geometric import nn as gnn
-from torch_geometric.data import Data, Batch
-
+from torch import Tensor, nn
+from torch.nn import functional as F
+from torch_geometric.data import Batch, Data
 from torch_geometric.nn import GCNConv
 
-from torch import nn, Tensor
-from torch.nn import functional as F
-
 __all__ = [
-    "_create_graph",
+    "FoldingEncoder",
+    "GraphMLP",
     "_create_batch_graph",
+    "_create_graph",
     "_local_covariance_knn",
     "local_covariance_knn",
-    "GraphMLP",
-    "FoldingEncoder",
 ]
 
 

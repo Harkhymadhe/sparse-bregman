@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import torch
-
-from torch.optim import Optimizer
-from torch.autograd import grad
 from torch import nn
+from torch.optim import Optimizer
 
-from sparse_bregman.optim.sparsity import SparsityEnforcer, NullSparsityEnforcer
+from sparse_bregman.optim.sparsity import NullSparsityEnforcer, SparsityEnforcer
 
-__all__ = ["LinearBregmanOptimizer", "ProximalGDOptimizer", "AdaBregmanOptimizer"]
+__all__ = ["AdaBregmanOptimizer", "LinearBregmanOptimizer", "ProximalGDOptimizer"]
 
 
 class LinearBregmanOptimizer(Optimizer):
@@ -18,10 +16,13 @@ class LinearBregmanOptimizer(Optimizer):
         lr: float = 1e-3,
         momentum: float = 0.0,
         delta: int = 1,
-        regularizer: SparsityEnforcer = NullSparsityEnforcer(),
+        regularizer: SparsityEnforcer | None = None,
         *args,
         **kwargs,
     ):
+        if regularizer is None:
+            regularizer = NullSparsityEnforcer()
+
         defaults = {
             "lr": lr,
             "delta": delta,
@@ -82,10 +83,13 @@ class ProximalGDOptimizer(Optimizer):
         lr: float = 1e-3,
         momentum: float = 0.0,
         delta: int = 1,
-        regularizer: SparsityEnforcer = NullSparsityEnforcer(),
+        regularizer: SparsityEnforcer | None = None,
         *args,
         **kwargs,
     ):
+        if regularizer is None:
+            regularizer = NullSparsityEnforcer()
+
         defaults = {
             "lr": lr,
             "momentum": momentum,
@@ -99,8 +103,6 @@ class ProximalGDOptimizer(Optimizer):
     def step(self, closure=None):
         for group in self.param_groups:
             lr = group["lr"]
-            delta = group["delta"]
-            momentum = group["momentum"]
             regularizer = group["regularizer"]
 
             for param in group["params"]:
@@ -109,7 +111,7 @@ class ProximalGDOptimizer(Optimizer):
 
                 grad = param.grad.data
 
-                param.data.add_(-lr * grad)
+                param.add_(-lr * grad)
                 param.data = regularizer.proximity_operator(x=param.data, delta=lr)
 
         return self
@@ -123,10 +125,13 @@ class AdaBregmanOptimizer(Optimizer):
         betas: tuple[float] = (0.9, 0.999),
         epsilon: float = 1e-8,
         delta: int = 1,
-        regularizer: SparsityEnforcer = NullSparsityEnforcer(),
+        regularizer: SparsityEnforcer | None = None,
         *args,
         **kwargs,
     ):
+        if regularizer is None:
+            regularizer = NullSparsityEnforcer()
+
         defaults = {
             "lr": lr,
             "betas": betas,

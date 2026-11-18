@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import torch
-
 from torch import nn
 
 from sparse_bregman.utils import generate_2d_grid
