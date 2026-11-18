@@ -3,8 +3,11 @@
 import os
 import torch
 
+import nvtx
+
 from torch.utils.data import DataLoader
 from torch import optim
+from torch.cuda import cudart
 
 from sparse_bregman.data import (
     NumpyShapeNetPartDataset,
@@ -27,6 +30,9 @@ from rich import print
 if __name__ == "__main__":
     torch.set_float32_matmul_precision("high")
 
+    # Instantiate CUDA profiler
+    cuda_profiler = cudart()
+
     # Model hyperparameters
     point_cloud_features = 3
     num_points = 2048
@@ -44,7 +50,7 @@ if __name__ == "__main__":
 
     epochs = 330
     device = "cuda"
-    opt = "adam"
+    opt = "proximopt"
 
     # Available optimizers
     opts = ["adam", "adam_breg", "lin_breg", "proximopt"]
@@ -89,8 +95,12 @@ if __name__ == "__main__":
         num_grid_points=N,
     ).to(device)
 
+    # Start CUDA profiler
+    cuda_profiler.cudaProfilerStart()
+
     # Compile model
-    model = torch.compile(model)
+    with nvtx.annotate("torch.compile", color="red"):
+        model = torch.compile(model)
 
     # Parameter counts
     num_grad_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -142,21 +152,28 @@ if __name__ == "__main__":
             # for batch in iter(train_dl):
             iteration += 1
 
-            # Move batch to device
-            X = batch[0].to(device)
+            with nvtx.annotate(f"Batch #{iteration} to CUDA", color = "limegreen"):
+                # Move batch to device
+                X = batch[0].to(device)
 
             # Inference and loss calculation
-            X_hat = model(X)
-            loss = loss_fn(X, X_hat)
+            with nvtx.annotate(f"Batch #{iteration} forward pass", color = "darkviolet"):
+                X_hat = model(X)
+            
+            with nvtx.annotate(f"Batch #{iteration} loss computation", color = "violet"): 
+                loss = loss_fn(X, X_hat)
 
             # Backpropragation of the loss
-            loss.backward()
+            with nvtx.annotate(f"Batch #{iteration} backpropagation", color = "cornflowerblue"):
+                loss.backward()
 
             # Gradient descent
-            optimizer.step()
+            with nvtx.annotate(f"Batch #{iteration} gradient descent", color = "royalblue"):
+                optimizer.step()
 
             # Clear out gradients
-            optimizer.zero_grad()
+            with nvtx.annotate(f"Batch #{iteration} zero.grad", color = "palegoldenrod"):
+                optimizer.zero_grad()
 
             # Log loss to tracking sequence
             epoch_train_losses.append(loss.item())
@@ -177,7 +194,7 @@ if __name__ == "__main__":
         model.eval()
 
         # Turn off gradients and computational graph
-        with torch.no_grad():
+        with nvtx.annotate(f"Eval process", color = "purple"), torch.no_grad():
             # Run eval loop
             for batch in tqdm(
                 test_dl, desc="Evaluation Phase", position=1, leave=LEAVE
@@ -210,6 +227,9 @@ if __name__ == "__main__":
         with torch.no_grad():
             state_dict = model.state_dict()
             torch.save(state_dict, model_path)
+
+    # Stop CUDA profiler
+    cuda_profiler.cudaProfilerStop()
 
     print(X_hat.shape)
     print(

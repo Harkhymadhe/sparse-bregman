@@ -1,4 +1,4 @@
-# FoldingNet From Scratch
+# FoldingNet + Sparse-Bregman
 
 ---
 
@@ -242,12 +242,14 @@ Potential improvements include:
 
 **Issue**
 
-The comparison between the optimizer used in the original work and the Sparse Bregman Optimizer has not yet been completed. This is due to the fact that the Gregman optimization scheme has not been successfully implemented yet. As a result, the current implementation only supports the default optimizer used in the original FoldingNet paper (AdamW).
+The comparison between the optimizer used in the original work and the Sparse Bregman Optimizer has not yet been completed.
+
+This is due to the fact that of all the Bregman optimization schemes, only the Linear Bregman functions appropriately; the others are still a work in progress. As a result, the current implementation only supports the **LinearBregmanOptimizer** and the default optimizer used in the original FoldingNet paper (AdamW).
 
 **Possible Fixes**
 
 * Complete implementation of Sparse Bregman update rules.
-* Integrate the optimizer into the PyTorch training pipeline
+* Integrate the optimizer(s) into the PyTorch training pipeline
 * Conduct controlled optimizer comparison experiments
 
 ---
@@ -365,5 +367,5 @@ Implement data augmentation schemes as suggested and train again.
 
 ### References
 
-1. [FoldingNet: Point Cloud Auto-encoder via Deep Grid Deformation](https://arxiv.org/abs/1712.07262)
-2. [A Bregman Learning Framework for Sparse Neural Networks](https://jmlr.org/papers/v23/21-0545.html)
+1. [FoldingNet: Point Cloud Auto-encoder via Deep Grid Deformation (2019)](https://arxiv.org/abs/1712.07262)
+2. [A Bregman Learning Framework for Sparse Neural Networks (2024)](https://jmlr.org/papers/v23/21-0545.html)

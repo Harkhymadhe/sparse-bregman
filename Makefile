@@ -7,3 +7,9 @@ format:
 
 run:
 	@python3 src/main.py
+
+run:
+	@python3 src/eval.py
+
+profile:
+	@./cuda_profiler.sh
