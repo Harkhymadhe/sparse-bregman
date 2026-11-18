@@ -162,3 +162,7 @@ def load_json_label_file(fpath: str):
         labels = json.load(f)
 
     return labels
+
+
+class OptimizerError(Exception):
+    pass
