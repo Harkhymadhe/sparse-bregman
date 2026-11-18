@@ -25,7 +25,6 @@ FoldingNet learns a global representation of a 3D shape and reconstructs the poi
 * [Model Architecture](#model-architecture)
 * [Installation](#installation)
 * [Usage](#usage)
-
   * [Dataset](#dataset)
   * [Configuration](#configuration)
   * [Training](#training)
@@ -163,9 +162,12 @@ make profile
 ├── LICENCE.md
 ├── README.md
 ├── notebook.ipynb
+├── outputs/
 ├── pyproject.toml
 └── src/
     ├── artefacts/
+    ├── conf/
+    │   └── config.yaml
     ├── data/
     │   └── shapenetpart_hdf5_2048/
     │       ├── test0.h5

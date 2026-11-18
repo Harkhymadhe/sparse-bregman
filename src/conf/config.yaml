@@ -1,0 +1,53 @@
+hydra:
+  job:
+    chdir: true
+wandb:
+  entity: harkhymadhe
+  project: meriti
+  mode: online
+reproducibility:
+  cudnn_deterministic: false
+  cudnn_benchmark: true
+  seed: 42
+model:
+  point_cloud_features: 3
+  code_dimension: 512
+  num_neighbours: 16
+  num_grid_points: 2025
+  grid_features: 2
+  out_features: 3
+data:
+  path: ${hydra:runtime.cwd}/src/data/shapenetpart_hdf5_2048
+  # path: ~/flood_data.squashfs
+  num_points: 2048
+  cache_size: 2048
+  normalize: false
+  train_fraction: .5
+  test_fraction: null
+artefacts:
+  path: ${hydra:runtime.cwd}/artefacts
+training:
+  num_epochs: 5 # TODO: Experiment with this (original: 330)
+  max_gradient_norm: 1.0
+  device: cuda
+  data:
+    batch_size: 16 # TODO: Experiment with batch size (original: 16)
+    num_workers: 4
+    pin_memory: true
+    prefetch_factor: 4 # TODO: Experiment with this (original: 2)
+  optimizer:
+    name: lin_breg
+    lr: 1e-3
+    weight_decay: 1e-2
+    beta1: .9
+    beta2: .999
+    momentum: 0.9
+    epsilon: 1e-8
+  regularizer:
+    delta: 1.0
+    weight: 1.0
+    requires_grad: true
+runs:
+  path: ${hydra:runtime.output_dir}/runs
+logs:
+  path: ${hydra:runtime.cwd}/main.log
