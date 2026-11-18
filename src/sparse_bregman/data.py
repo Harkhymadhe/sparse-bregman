@@ -12,10 +12,10 @@ from random import shuffle
 from torch.utils.data import Dataset, DataLoader
 from sparse_bregman.utils import load_json_label_file
 
-__all__ = ["NumpyNumpyShapeNetPartDataset", "H5NumpyShapeNetPartDataset"]
+__all__ = ["NumpyShapeNetPartDataset", "H5ShapeNetPartDataset"]
 
 
-class NumpyNumpyShapeNetPartDataset(Dataset):
+class NumpyShapeNetPartDataset(Dataset):
     def __init__(
         self,
         path: str | None = None,
@@ -139,21 +139,21 @@ class NumpyNumpyShapeNetPartDataset(Dataset):
 
     def split(
         self, train_fraction: float = 0.5, test_fraction: float = 0.5
-    ) -> tuple["NumpyNumpyShapeNetPartDataset"]:
+    ) -> tuple["NumpyShapeNetPartDataset"]:
         num_train = int(len(self.files) * train_fraction)
         num_test = int(len(self.files) * test_fraction)
 
         train_files, test_files = self.files[:num_train], self.files[-num_test:]
 
         train_ds, test_ds = (
-            NumpyNumpyShapeNetPartDataset(
+            NumpyShapeNetPartDataset(
                 path=self.path,
                 num_points=self.num_points,
                 files=test_files,
                 cache_size=self.cache_size,
                 normalize=self.normalize,
             ),
-            NumpyNumpyShapeNetPartDataset(
+            NumpyShapeNetPartDataset(
                 path=self.path,
                 num_points=self.num_points,
                 files=test_files,
@@ -168,7 +168,7 @@ class NumpyNumpyShapeNetPartDataset(Dataset):
         return len(self.files)
 
 
-class H5NumpyShapeNetPartDataset(Dataset):
+class H5ShapeNetPartDataset(Dataset):
     def __init__(
         self,
         path: str | None = None,
@@ -269,9 +269,9 @@ class H5NumpyShapeNetPartDataset(Dataset):
 
     def split(
         self, train_fraction: float = 0.5, test_fraction: float = 0.5
-    ) -> tuple["H5NumpyShapeNetPartDataset"]:
+    ) -> tuple["H5ShapeNetPartDataset"]:
         train_ds, test_ds = (
-            H5NumpyShapeNetPartDataset(
+            H5ShapeNetPartDataset(
                 path=self.path,
                 num_points=self.num_points,
                 files=None,
@@ -279,7 +279,7 @@ class H5NumpyShapeNetPartDataset(Dataset):
                 normalize=self.normalize,
                 data_split="train",
             ),
-            H5NumpyShapeNetPartDataset(
+            H5ShapeNetPartDataset(
                 path=self.path,
                 num_points=self.num_points,
                 files=None,
@@ -293,7 +293,7 @@ class H5NumpyShapeNetPartDataset(Dataset):
 
 
 if __name__ == "__main__":
-    dataset = H5NumpyShapeNetPartDataset()
+    dataset = H5ShapeNetPartDataset()
     # print(dataset.files)
     # print(len(dataset.files))
 
