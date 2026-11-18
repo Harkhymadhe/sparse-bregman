@@ -64,7 +64,7 @@ class FoldingDecoder(nn.Module):
 
         t = torch.cat([x, self.grid.repeat(len(x), 1, 1)], dim=2)
         first_folding = self.first_folding(t)
-        
+
         x_ = torch.cat([x, first_folding], dim=2)
         second_folding = self.second_folding(x_)
 
