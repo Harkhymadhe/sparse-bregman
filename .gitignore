@@ -8,3 +8,6 @@ __pycache__/
 .roopik/
 .ruff_cache/
 outputs/
+
+# CUDA profiling
+nsys_reports/
