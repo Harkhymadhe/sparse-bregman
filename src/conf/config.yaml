@@ -3,7 +3,7 @@ hydra:
     chdir: true
 wandb:
   entity: harkhymadhe
-  project: meriti
+  project: sparse-bregman
   mode: online
 reproducibility:
   cudnn_deterministic: false
@@ -25,7 +25,7 @@ data:
   train_fraction: .5
   test_fraction: null
 artefacts:
-  path: ${hydra:runtime.cwd}/artefacts
+  path: ${hydra:runtime.output_dir}/artefacts
 training:
   num_epochs: 5 # TODO: Experiment with this (original: 330)
   max_gradient_norm: 1.0
@@ -50,4 +50,4 @@ training:
 runs:
   path: ${hydra:runtime.output_dir}/runs
 logs:
-  path: ${hydra:runtime.cwd}/main.log
+  path: ${hydra:runtime.output_dir}/main.log
