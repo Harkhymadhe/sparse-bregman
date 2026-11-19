@@ -26,6 +26,8 @@ data:
   test_fraction: null
 artefacts:
   path: ${hydra:runtime.output_dir}/artefacts
+profiling:
+  num_epochs: 5 # TODO: Number of epochs to profile GPU for
 training:
   num_epochs: 5 # TODO: Experiment with this (original: 330)
   max_gradient_norm: 1.0

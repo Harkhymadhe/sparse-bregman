@@ -34,6 +34,9 @@ def main(cfg: DictConfig):
     # Instantiate CUDA profiler
     cuda_profiler = cudart()
 
+    # CUDA profiling epochs
+    cuda_profiling_epochs = cfg.profiling.num_epochs
+
     # Add logger from Loguru
     logger.add(sink=cfg.logs.path, enqueue=True)
 
@@ -59,6 +62,12 @@ def main(cfg: DictConfig):
 
     # Artefact persistence
     model_base_path = cfg.artefacts.path
+
+    os.mkdir(model_base_path)
+
+    # Create .gitkeep file in artefacts folder
+    with open(f"{model_base_path}/.gitkeep", "w") as f:
+        pass
 
     # Training hyperparameters
     batch_size = cfg.training.data.batch_size
@@ -133,7 +142,7 @@ def main(cfg: DictConfig):
     num_params = sum(p.numel() for p in model.parameters())
 
     logger.info(
-        f"Number of parameters: {num_params:,}\nNumber of trainable parameters: {num_grad_params:,}\n\n"
+        f"Number of parameters | Total: {num_params:,} | Trainable: {num_grad_params:,}\n\n"
     )
 
     # Instantiate optimizer
@@ -220,12 +229,7 @@ def main(cfg: DictConfig):
 
                 # Save model artefacts intermittently
                 if iteration in [5000, 10000, 20000, 40000, 100000, 500000, 4000000]:
-                    parts = __file__.split(os.sep)
-                    idx = parts.index("src")
-                    model_path = __file__.split(os.sep)[1 : idx + 1] + ["artefacts"]
-
-                    model_path = os.sep + os.sep.join(model_path)
-                    model_path = f"{model_path}/iteration_{iteration}.pt"
+                    model_path = f"{model_base_path}/iteration_{iteration}.pt"
 
                     with torch.no_grad():
                         state_dict = model.state_dict()
@@ -254,7 +258,7 @@ def main(cfg: DictConfig):
             epoch_test_losses.clear()
 
             logger.info(
-                f"\nEpoch {epoch} | Train loss: {epoch_train_loss:.4f} | Test loss: {epoch_test_loss:.4f}"
+                f"Epoch {epoch} | Train loss: {epoch_train_loss:.4f} | Test loss: {epoch_test_loss:.4f}"
             )
 
         # Save model to disk
@@ -264,7 +268,7 @@ def main(cfg: DictConfig):
             state_dict = model.state_dict()
             torch.save(state_dict, model_path)
 
-        if epoch == 1:
+        if epoch == cuda_profiling_epochs:
             # Stop CUDA profiler
             cuda_profiler.cudaProfilerStop()
 
