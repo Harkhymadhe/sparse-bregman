@@ -5,8 +5,12 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+
+import functools
 from torch import Tensor
 from torch_geometric.data import Batch, Data
+
+from datetime import datetime
 
 __all__ = [
     "_create_batch_graph",
@@ -18,6 +22,22 @@ __all__ = [
 ]
 
 
+def function_timer(show_time=False, *args, **kwargs):
+    def time_function(func, *args, **kwargs):
+        @functools.wraps(func)
+        def new_func(*args, **kwargs):
+            start = datetime.now()
+            result = func(*args, **kwargs)
+            end = datetime.now()
+
+            return (result, end - start) if show_time else result
+
+        return new_func
+
+    return time_function
+
+
+@function_timer()
 def _create_graph(data: Tensor, neighbours: Tensor, label: int = 0):
     from_edges = np.array(
         [[i for i in range(neighbours.shape[1])] for _ in range(neighbours.shape[0])]
@@ -28,8 +48,45 @@ def _create_graph(data: Tensor, neighbours: Tensor, label: int = 0):
     neighbours = np.concatenate([neighbours, neighbours[::-1, :]], axis=1)
 
     data = Data(
-        x=data,
+        x=torch.tensor(data),
         edge_index=torch.tensor(neighbours).to(torch.int32),
+        y=torch.tensor([label]),
+    )
+    return data
+
+
+@function_timer()
+def _create_graph_vectorized(data: Tensor, neighbours: Tensor, label: int = 0):
+
+    from_edges = np.arange(neighbours.shape[1]).reshape(1, -1)
+    from_edges = np.repeat(from_edges, neighbours.shape[0]).reshape(1, -1)
+
+    neighbours = np.concatenate(
+        [from_edges, neighbours.flatten().reshape(1, -1)], axis=0
+    )
+    neighbours = np.concatenate([neighbours, neighbours[::-1, :]], axis=1)
+
+    data = Data(
+        x=torch.tensor(data),
+        edge_index=torch.tensor(neighbours).to(torch.int32),
+        y=torch.tensor([label]),
+    )
+    return data
+
+
+@function_timer()
+def _create_graph_tensorized(data: Tensor, neighbours: Tensor, label: int = 0):
+    from_edges = torch.arange(neighbours.shape[1], device=data.device).reshape(1, -1)
+    from_edges = from_edges.repeat(neighbours.shape[0], 1).reshape(1, -1)
+
+    neighbours = torch.cat(
+        [from_edges.view(1, -1), torch.tensor(neighbours).flatten().view(1, -1)], dim=0
+    )
+    neighbours = torch.cat([neighbours, torch.flip(neighbours, [0])], dim=1)
+
+    data = Data(
+        x=data,
+        edge_index=neighbours,
         y=torch.tensor([label]),
     )
     return data
@@ -42,7 +99,7 @@ def _create_batch_graph(
     neighbours = batch_neighbours.chunk(chunks=len(batch_data), dim=0)
 
     data_list = [
-        _create_graph(data=x.squeeze(0), neighbours=n.squeeze(0))
+        _create_graph_tensorized(data=x.squeeze(0), neighbours=n.squeeze(0))
         for (x, n) in zip(xs, neighbours)
     ]
 

@@ -6,91 +6,16 @@ from torch.nn import functional as F
 from torch_geometric.data import Batch, Data
 from torch_geometric.nn import GCNConv
 
+from sparse_bregman.utils import (
+    _create_graph,
+    _create_batch_graph,
+    local_covariance_knn,
+)
+
 __all__ = [
     "FoldingEncoder",
     "GraphMLP",
-    "_create_batch_graph",
-    "_create_graph",
-    "_local_covariance_knn",
-    "local_covariance_knn",
 ]
-
-
-def _create_graph(data: Tensor, neighbours: Tensor, label: int = 0):
-    from_edges = (
-        torch.tensor(
-            [
-                [i for i in range(neighbours.shape[1])]
-                for _ in range(neighbours.shape[0])
-            ]
-        )
-        .flatten()
-        .to(data.device)
-    )
-    neighbours = torch.cat(
-        [from_edges.view(1, -1), neighbours.flatten().view(1, -1)], dim=0
-    )
-    neighbours = torch.cat([neighbours, torch.flip(neighbours, [0])], dim=1)
-
-    data = Data(
-        x=data,
-        edge_index=neighbours,
-        y=torch.tensor([label]),
-    )
-    return data
-
-
-def _create_batch_graph(
-    batch_data: Tensor, batch_neighbours: Tensor, batch_label: int = 0
-):
-    xs = batch_data.chunk(chunks=len(batch_data), dim=0)
-    neighbours = batch_neighbours.chunk(chunks=len(batch_data), dim=0)
-
-    data_list = [
-        _create_graph(data=x.squeeze(0), neighbours=n.squeeze(0))
-        for (x, n) in zip(xs, neighbours)
-    ]
-
-    return Batch.from_data_list(data_list=data_list)
-
-
-def _local_covariance_knn(xs, idx, k=5):
-    covariances = []
-    for x, n in zip(xs, idx):
-        # print(x.shape, n.shape)
-        # for i in range(len(xs)):
-        neighbors = x.squeeze(0)[n.squeeze(0)]  # (k, D)
-        neighbors = neighbors - neighbors.mean(0, keepdim=True)
-        cov = neighbors.mT @ neighbors / (k - 1)
-        # print("Small COV: ", cov.shape)
-        covariances.append(cov)
-
-    # print("COV len: ", len(covariances))
-    covariances = torch.stack(covariances, dim=0).flatten(start_dim=-2)
-    # print("COV: ", covariances.shape)
-    return covariances
-
-
-def local_covariance_knn(X, k=5):
-    """
-    X: (N, D)
-    Returns: (N, D, D) local covariance per sample
-    """
-    shape = X.shape
-    N, D = shape[-2], shape[-1]
-
-    # pairwise distances
-    dist = torch.cdist(X, X)
-
-    # indices of k nearest neighbors
-    knn_idx = dist.topk(k=k, largest=False).indices[:,]
-
-    xs = X.chunk(chunks=len(X), dim=0)
-    idx = knn_idx.chunk(chunks=len(knn_idx), dim=0)
-
-    covariances = _local_covariance_knn(xs=xs, idx=idx, k=k)
-
-    return knn_idx, covariances
 
 
 class GraphMLP(nn.Module):
